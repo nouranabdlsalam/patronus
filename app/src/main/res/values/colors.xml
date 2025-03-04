@@ -2,4 +2,11 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="blue"> #0199E2 </color>
+    <color name="navy"> #282F41 </color>
+    <color name="light_navy"> #475270 </color>
+    <color name="nav_bar_bg"> #E2E3EC </color>
+    <color name="nav_bar_stroke"> #B5C5F9 </color>
+    <color name="toggle_off"> #BBC3C7 </color>
+    <color name="red"> #EC191C </color>
 </resources>
