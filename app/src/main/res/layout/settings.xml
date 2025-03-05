@@ -30,22 +30,11 @@
             android:layout_marginStart="16dp"
             android:layout_marginBottom="10dp"
             android:gravity="center"
-            android:text="Security Mode"
+            android:text="Settings"
             android:textColor="#FFFFFF"
             android:textSize="35sp"
             android:textStyle="bold" />
     </LinearLayout>
-
-    <!-- Automatic Mode Title -->
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginTop="10dp"
-        android:text="Automatic Mode"
-        android:textColor="#FFFFFF"
-        android:textSize="25sp"
-        android:textStyle="bold" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -55,10 +44,10 @@
         android:padding="10dp">
 
         <TextView
-            android:id="@+id/AutoModeTitle"
+            android:id="@+id/AutoThreatTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Auto Mode"
+            android:text="Auto Threat"
             android:textColor="#FFFFFF"
             android:textSize="25sp"
             android:textStyle="bold"
@@ -66,19 +55,19 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/AutoModeDescription"
+            android:id="@+id/AutoThreatDescription"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
-            android:text="Automatically switches between security modes."
+            android:text="Automatically mitigate the threats."
             android:textColor="#FFFFFF"
             android:textSize="20sp"
-            app:layout_constraintEnd_toStartOf="@id/autoModeSwitch"
+            app:layout_constraintEnd_toStartOf="@id/AutoThreatSwitch"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/AutoModeTitle" />
+            app:layout_constraintTop_toBottomOf="@id/AutoThreatTitle" />
 
         <Switch
-            android:id="@+id/autoModeSwitch"
+            android:id="@+id/AutoThreatSwitch"
             android:layout_width="48dp"
             android:layout_height="48dp"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -86,16 +75,6 @@
             app:layout_constraintTop_toTopOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <!-- Manual Mode Title -->
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:text="Manual Mode"
-        android:textColor="#FFFFFF"
-        android:textSize="25sp"
-        android:textStyle="bold" />
-
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -104,38 +83,35 @@
         android:padding="10dp">
 
         <TextView
-            android:id="@+id/HighSecurityTitle"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:text="High Security"
-            android:textColor="#FFFFFFFF"
-            android:textSize="25sp"
-            android:textStyle="bold"
-            app:layout_constraintEnd_toStartOf="@id/highSecuritySwitch"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.0" />
-
-        <Switch
-            android:id="@+id/highSecuritySwitch"
+            android:id="@+id/VPNTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:minWidth="48dp"
-            android:minHeight="48dp"
-            app:layout_constraintEnd_toEndOf="parent"
+            android:text="VPN"
+            android:textColor="#FFFFFF"
+            android:textSize="25sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/tvHighSecurityDescription"
+            android:id="@+id/VPNDescription"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
-            android:text="Continously monitoring the system for malicious behaviour."
+            android:text="Ensure private communication and prevent data interception."
             android:textColor="#FFFFFF"
             android:textSize="20sp"
-            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/VPNSwitch"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/HighSecurityTitle" />
+            app:layout_constraintTop_toBottomOf="@id/VPNTitle" />
+
+        <Switch
+            android:id="@+id/VPNSwitch"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -146,38 +122,40 @@
         android:padding="10dp">
 
         <TextView
-            android:id="@+id/BalancedSecurityTitle"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:text="Balanced Security"
-            android:textColor="#FFFFFFFF"
-            android:textSize="25sp"
-            android:textStyle="bold"
-            app:layout_constraintEnd_toStartOf="@id/BalancedSecuritySwitch"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.0" />
-
-        <Switch
-            android:id="@+id/BalancedSecuritySwitch"
+            android:id="@+id/SecModeTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:minWidth="48dp"
-            android:minHeight="48dp"
-            app:layout_constraintEnd_toEndOf="parent"
+            android:text="Security Modes"
+            android:textColor="#FFFFFF"
+            android:textSize="25sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/BalancedSecurityDescription"
+            android:id="@+id/SecModeDescription"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
-            android:text="Monitoring the system at specific seleted time."
+            android:text="Select a security mode."
             android:textColor="#FFFFFF"
             android:textSize="20sp"
-            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/SecModeSwitch"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/BalancedSecurityTitle" />
+            app:layout_constraintTop_toBottomOf="@id/SecModeTitle" />
+
+        <Button
+            android:id="@+id/SecModeSwitch"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@android:color/transparent"
+            android:text="›"
+            android:textColor="#FFFFFF"
+            android:textSize="40sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -188,38 +166,84 @@
         android:padding="10dp">
 
         <TextView
-            android:id="@+id/LowSecurityTitle"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:text="Low security"
-            android:textColor="#FFFFFFFF"
-            android:textSize="25sp"
-            android:textStyle="bold"
-            app:layout_constraintEnd_toStartOf="@id/LowSecuritySwitch"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.0" />
-
-        <Switch
-            android:id="@+id/LowSecuritySwitch"
+            android:id="@+id/TrustedNetworksTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:minWidth="48dp"
-            android:minHeight="48dp"
-            app:layout_constraintEnd_toEndOf="parent"
+            android:text="Trusted Networks"
+            android:textColor="#FFFFFF"
+            android:textSize="25sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/LowSecurityDescription"
+            android:id="@+id/TrustedNetworksDescription"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
-            android:text="The system stops the monitoring."
+            android:text="View trusted networks."
             android:textColor="#FFFFFF"
             android:textSize="20sp"
-            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/TrustedNetworksSwitch"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/LowSecurityTitle" />
+            app:layout_constraintTop_toBottomOf="@id/TrustedNetworksTitle" />
+
+        <Button
+            android:id="@+id/TrustedNetworksSwitch"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@android:color/transparent"
+            android:text="›"
+            android:textColor="#FFFFFF"
+            android:textSize="40sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:background="#48506B"
+        android:padding="10dp">
+
+        <TextView
+            android:id="@+id/BlockedIPAddressesTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Blocked IP Addresses"
+            android:textColor="#FFFFFF"
+            android:textSize="25sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/BlockedIPAddressesDescription"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:text="View and unblock blocked IPs."
+            android:textColor="#FFFFFF"
+            android:textSize="20sp"
+            app:layout_constraintEnd_toStartOf="@id/BlockedIPAddressesSwitch"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/BlockedIPAddressesTitle" />
+
+        <Button
+            android:id="@+id/BlockedIPAddressesSwitch"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@android:color/transparent"
+            android:text="›"
+            android:textColor="#FFFFFF"
+            android:textSize="40sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -328,5 +352,4 @@
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
-
 </LinearLayout>
