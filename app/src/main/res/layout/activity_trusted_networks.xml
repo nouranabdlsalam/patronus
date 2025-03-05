@@ -5,26 +5,101 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".TrustedNetworks"
+    tools:context=".TrustedNetworksActivity"
     android:background="@color/navy">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
+        android:orientation="horizontal"
+        android:weightSum="3"
         android:background="@drawable/bubble_bg">
+
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/back"
+            android:scaleType="centerCrop"
+            android:background="@color/blue"
+            android:layout_marginBottom="10dp"
+            android:layout_weight="1"
+            android:layout_gravity="center_vertical"
+            />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/trusted_networks"
-            android:layout_gravity="center"
             android:textSize="30sp"
-            android:layout_marginTop="10dp"
-            android:layout_marginBottom="30dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="45dp"
             android:textStyle="bold"
-            android:textColor="@color/white"/>
+            android:textColor="@color/white"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:shadowColor="@color/light_navy"
+            android:shadowRadius="6"
+            android:shadowDy="7"/>
 
     </LinearLayout>
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:weightSum="3"
+        android:gravity="center"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp">
+
+        <ImageView
+            android:layout_width="38dp"
+            android:layout_height="35dp"
+            android:src="@drawable/warning"
+            android:layout_weight="0.5"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/trusted_networks_text"
+            android:textColor="@color/white"
+            android:textSize="18sp"
+            android:layout_marginStart="10dp"
+            android:layout_weight="2.5"
+            android:textStyle="bold"/>
+
+    </LinearLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="280dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/trusted_networks_recycler_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="10dp"
+            android:layout_marginTop="10dp"
+            android:nestedScrollingEnabled="true" />
+
+    </ScrollView>
+
+    <com.google.android.material.button.MaterialButton
+        android:layout_width="319dp"
+        android:layout_height="57dp"
+        app:cornerRadius="9dp"
+        android:backgroundTint="#B30199E2"
+        android:text="Add Trusted Network"
+        android:layout_gravity="center"
+        android:textStyle="bold"
+        android:textSize="22sp"
+        android:shadowColor="@color/light_navy"
+        android:shadowRadius="6"
+        android:shadowDy="7"
+        android:layout_marginTop="40dp"
+        android:layout_marginBottom="20dp" />
+    
 </LinearLayout>
