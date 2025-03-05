@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">Patronus</string>
     <string name="trusted_networks">Trusted Networks</string>
+    <string name="trusted_networks_text">Trusted networks are not scanned to save device resources.</string>
 </resources>
