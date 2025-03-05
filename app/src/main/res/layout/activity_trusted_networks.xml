@@ -27,6 +27,7 @@
             />
 
         <TextView
+            android:id="@+id/trusted_networks_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/trusted_networks"
@@ -59,6 +60,7 @@
             android:layout_weight="0.5"/>
 
         <TextView
+            android:id="@+id/trusted_networks_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/trusted_networks_text"
@@ -88,6 +90,7 @@
     </ScrollView>
 
     <com.google.android.material.button.MaterialButton
+        android:id="@+id/add_trusted_networks_button"
         android:layout_width="319dp"
         android:layout_height="57dp"
         app:cornerRadius="9dp"
