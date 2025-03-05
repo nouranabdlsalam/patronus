@@ -12,10 +12,11 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:src="@drawable/wifi_icon"
-        android:layout_weight="1.5"
+        android:layout_weight="1"
         android:layout_gravity="center_vertical"
         android:layout_marginTop="5dp"
-        android:layout_marginBottom="5dp"/>
+        android:layout_marginBottom="5dp"
+        android:layout_marginLeft="5dp"/>
 
     <TextView
         android:id="@+id/list_text"
@@ -25,9 +26,10 @@
         android:textColor="@color/white"
         android:textStyle="bold"
         android:textSize="22sp"
-        android:layout_weight="7"
+        android:layout_weight="7.5"
         android:gravity="left"
         android:layout_gravity="center_vertical"
+        android:layout_marginLeft="10dp"
         />
 
     <ImageButton
