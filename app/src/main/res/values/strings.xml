@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Patronus</string>
+    <string name="trusted_networks">Trusted Networks</string>
 </resources>
