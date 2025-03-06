@@ -9,4 +9,6 @@
     <color name="nav_bar_stroke"> #B5C5F9 </color>
     <color name="toggle_off"> #BBC3C7 </color>
     <color name="red"> #EC191C </color>
+    <color name="green">#2E7D32</color>
+
 </resources>
