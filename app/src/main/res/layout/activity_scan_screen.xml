@@ -66,11 +66,10 @@
             android:textSize="20sp"
             android:textColor="@color/white"
             android:textStyle="bold"
-            android:buttonTint="@color/white"
             android:checked="true"/>
 
         <androidx.appcompat.widget.AppCompatRadioButton
-            android:id="@+id/installed_apps_radio"
+            android:id="@+id/select_apps_radio"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/select_apps"
