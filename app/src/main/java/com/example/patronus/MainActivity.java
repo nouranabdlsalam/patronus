@@ -13,5 +13,15 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        Button trusted = findViewById(R.id.test_trusted_networks);
+        trusted.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(MainActivity.this, BlockedIPsActivity.class);
+                startActivity(i);
+            }
+        });
+
     }
 }
