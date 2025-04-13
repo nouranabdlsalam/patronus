@@ -17,14 +17,14 @@
 
         <ImageButton
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="48dp"
             android:src="@drawable/back"
-            android:scaleType="centerCrop"
+            android:scaleType="fitCenter"
             android:background="@color/blue"
             android:layout_marginBottom="10dp"
             android:layout_weight="1"
             android:layout_gravity="center_vertical"
-            />
+            android:contentDescription="Back Button" />
 
         <TextView
             android:id="@+id/trusted_networks_title"
@@ -45,12 +45,14 @@
     </LinearLayout>
 
     <ImageButton
+        android:id="@+id/malware_scan"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:src="@drawable/scan_btn"
         android:background="@color/navy"
         android:layout_gravity="center"
-        android:layout_marginTop="10dp"/>
+        android:layout_marginTop="10dp"
+        android:contentDescription="Scan Button" />
 
     <RadioGroup
         android:layout_width="wrap_content"
@@ -58,7 +60,7 @@
         android:layout_marginStart="35dp"
         android:orientation="vertical">
 
-        <androidx.appcompat.widget.AppCompatRadioButton
+        <RadioButton
             android:id="@+id/all_apps_radio"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -68,7 +70,7 @@
             android:textStyle="bold"
             android:checked="true"/>
 
-        <androidx.appcompat.widget.AppCompatRadioButton
+        <RadioButton
             android:id="@+id/select_apps_radio"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
