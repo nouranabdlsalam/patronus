@@ -28,9 +28,6 @@
 
         </activity>
         <activity
-            android:name=".ScanScreenActivity"
-            android:exported="false" />
-        <activity
             android:name=".BlockedIPsActivity"
             android:exported="false" />
         <activity
@@ -45,8 +42,21 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".MaliciousAppsActivity"
+            android:exported="false" />
+        <activity
+            android:name=".SelectAppActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ScanScreenActivity"
+            android:exported="false" />
 
 
     </application>
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
+    <uses-permission android:name="android.permission.QUERY_ALL_PACKAGES" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE_DATA_SYNC" />
 
 </manifest>

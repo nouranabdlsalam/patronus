@@ -42,7 +42,7 @@ public class BlockedIPsActivity extends AppCompatActivity {
         String [] trustedNetworks = {"192.168.15.212", "192.168.13.122"};
         ArrayList <ListItemData> result = new ArrayList<>();
         for (String network: trustedNetworks) {
-            result.add(new ListItemData(R.drawable.ip_icon, network, R.drawable.trash));
+            result.add(new ListItemData(R.drawable.ip_icon, network, R.drawable.trash, false));
         }
         return result;
     }
