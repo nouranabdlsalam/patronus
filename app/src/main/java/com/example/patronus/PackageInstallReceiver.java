@@ -11,14 +11,23 @@ public class PackageInstallReceiver extends BroadcastReceiver {
 
     @Override
     public void onReceive(Context context, Intent intent) {
+        String action = intent.getAction();
+
         Uri data = intent.getData();
         if (data == null) return;
 
         String packageName = data.getSchemeSpecificPart();
         if (packageName == null) return;
 
-        // Log action for debugging (optional)
-        Log.d("AppChangeReceiver", "App installed or updated: " + packageName);
+        if (Intent.ACTION_PACKAGE_ADDED.equals(action)) {
+            Log.d("SecurityScan", "New app installed: " + packageName);
+            Log.d("AnomalyDetection", "Anomalous app detected: " + packageName + " | Reason: New install");
+            Log.d("MalwareScanner", "Scanning app for malware: " + packageName);
+        } else if (Intent.ACTION_PACKAGE_REPLACED.equals(action)) {
+            Log.d("SecurityScan", "App updated: " + packageName);
+            Log.d("AnomalyDetection", "App update detected: " + packageName + " | Reason: App updated");
+            Log.d("MalwareScanner", "Re-scanning updated app for malware: " + packageName);
+        }
 
         AppScanner scanner = new AppScanner(context);
         int classification = -1;
