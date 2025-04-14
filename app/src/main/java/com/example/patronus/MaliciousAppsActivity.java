@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
@@ -25,6 +26,7 @@ public class MaliciousAppsActivity extends AppCompatActivity {
     Button done;
     ScrollView scrollView;
     static ArrayList<App> selectedApps = new ArrayList<>();
+    LinearLayout navbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,6 +50,9 @@ public class MaliciousAppsActivity extends AppCompatActivity {
         scrollView.setLayoutParams(layoutParams);
 
         recyclerView = findViewById(R.id.trusted_networks_recycler_view);
+
+        navbar = findViewById(R.id.navigationBar);
+        navbar.setVisibility(View.GONE);
 
         List<App> allApps = getIntent().getParcelableArrayListExtra("malwareApps");
         if (allApps == null) {
