@@ -151,7 +151,7 @@
         android:id="@+id/navigationBar"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:background="#D3D3D3"
+        android:background="#E2E3EC"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent">
@@ -189,9 +189,10 @@
             tools:ignore="MissingConstraints">
 
             <ImageView
-                android:layout_width="30dp"
+                android:layout_width="60dp"
                 android:layout_height="30dp"
-                android:src="@drawable/scan" />
+                android:src="@drawable/scan"
+                android:background="@drawable/nav_selected"/>
 
             <TextView
                 android:layout_width="wrap_content"
