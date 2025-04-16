@@ -31,8 +31,11 @@ public class AppScanner {
         Log.d("SCANNING:", app.getFeatures()[0] + " ");
         app.setFeatures(extractFeatures(app));
         Log.d("SCANNING:", "set features for: " + app.getPackageName());
-        int classification = classify(app);
-        return classification;
+        double classification = classify(app);
+        ApplicationInfo appInfo = context.getPackageManager().getApplicationInfo(app.getPackageName(), 0);
+        int category = appInfo.category;
+        int contextClassification = getContextAwareScore(classification, category);
+        return contextClassification;
     }
 
     protected int scanApp(String packageName) throws PackageManager.NameNotFoundException {
@@ -183,8 +186,8 @@ public class AppScanner {
         return features;
     }
 
-    protected int classify(App app){
-        int classification = -1;
+    protected double classify(App app){
+        double classification = -1;
         try {
             HybridMalwareModel model = HybridMalwareModel.newInstance(context);
 
@@ -212,12 +215,14 @@ public class AppScanner {
 
             float[] outputArray = outputFeature0.getFloatArray();
 
-            if (outputArray[0] > 0.5){
-                classification = 1;
-            }
-            else {
-                classification = 0;
-            }
+//            if (outputArray[0] == 1){
+//                classification = 1;
+//            }
+//            else {
+//                classification = 0;
+//            }
+
+            classification = outputArray[0]; //context trial
 
             Log.d("Classification", app.getPackageName() + ": " + classification);
 
@@ -227,6 +232,47 @@ public class AppScanner {
             // TODO Handle the exception
         }
         return classification;
+    }
+
+    public int getContextAwareScore(double classification, int category){
+        double categoryRisk;
+        switch (category){
+            case 8: // Category for apps which are primarily accessibility apps, such as screen-readers. (src: Android Docs)
+                categoryRisk = 0.7;
+                break;
+            case 1: // Category for apps which primarily work with audio or music, such as music players.
+                categoryRisk = 0.2;
+                break;
+            case 0: // Category for apps which are primarily games.
+                categoryRisk = 0.6;
+                break;
+            case 3: // Category for apps which primarily work with images or photos, such as camera or gallery apps.
+                categoryRisk = 0.1;
+                break;
+            case 6: // Category for apps which are primarily maps apps, such as navigation apps.
+                categoryRisk = 0.4;
+                break;
+            case 5: // Category for apps which are primarily news apps, such as newspapers, magazines, or sports apps.
+                categoryRisk = 0.3;
+                break;
+            case 7: // Category for apps which are primarily productivity apps, such as cloud storage or workplace apps.
+                categoryRisk = 0.3;
+                break;
+            case 4: // Category for apps which are primarily social apps, such as messaging, communication, email, or social network apps.
+                categoryRisk = 0.2;
+                break;
+            case -1: // Value when category is undefined.
+                categoryRisk = 0.8;
+                break;
+            case 2: // Category for apps which primarily work with video or movies, such as streaming video apps.
+                categoryRisk = 0.4;
+                break;
+            default:
+                categoryRisk = 0.5;
+        }
+
+        return (((0.6 * classification + 0.4 * categoryRisk) > 0.7) ? 1 : 0);
+
     }
 
 }

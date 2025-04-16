@@ -8,7 +8,10 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.net.wifi.WifiManager;
 import android.os.Build;
+import android.os.Handler;
 import android.os.IBinder;
+import android.os.Looper;
+import android.util.Log;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
@@ -18,6 +21,8 @@ import androidx.core.app.NotificationCompat;
 public class BgReceiverService extends Service {
     WifiConAttemptReceiver wifiConAttemptReceiver = new WifiConAttemptReceiver();
     PackageInstallReceiver packageInstallReceiver = new PackageInstallReceiver();
+    Handler handler;
+    Runnable periodicNetworkTask;
 
     @Override
     public void onCreate() {
@@ -34,6 +39,20 @@ public class BgReceiverService extends Service {
 
         registerReceiver(packageInstallReceiver, filter);
         Toast.makeText(this, "Registered Receivers", Toast.LENGTH_SHORT).show();
+
+        handler = new Handler(Looper.getMainLooper());
+        periodicNetworkTask = new Runnable() {
+            @Override
+            public void run() {
+                Log.d("AppMonitorService", "Starting network scan");
+
+                Intent intent = new Intent(BgReceiverService.this, NetworkMonitorService.class);
+                startService(intent); // it will stop itself after 30 sec
+
+                // Schedule next run
+                handler.postDelayed(this, 15 * 60 * 1000); // 15 minutes
+            }
+        };
     }
 
     @Nullable
@@ -50,9 +69,12 @@ public class BgReceiverService extends Service {
                 .setContentText("We've got your back.")
                 .setOngoing(true)  // Makes it persistent (user can't swipe it away)
                 .setPriority(NotificationCompat.PRIORITY_HIGH)
-                .setSmallIcon(R.drawable.ic_launcher_foreground)
+                .setSmallIcon(R.mipmap.logo)
                 .build();
         startForeground(1, notification); // Start the service in foreground mode
+
+        handler.post(periodicNetworkTask);
+
         return START_STICKY;
     }
 
@@ -61,6 +83,11 @@ public class BgReceiverService extends Service {
         super.onDestroy();
         if (wifiConAttemptReceiver != null) {
             unregisterReceiver(wifiConAttemptReceiver);
+            Toast.makeText(this, "Unregistered Receiver", Toast.LENGTH_SHORT).show();
+        }
+
+        if (packageInstallReceiver != null) {
+            unregisterReceiver(packageInstallReceiver);
             Toast.makeText(this, "Unregistered Receiver", Toast.LENGTH_SHORT).show();
         }
     }

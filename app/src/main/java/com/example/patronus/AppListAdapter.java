@@ -54,7 +54,13 @@ public class AppListAdapter extends RecyclerView.Adapter<ListViewHolder> {
                     Intent threatRemedIntent = new Intent(context, ThreatRemediation.class);
                     ArrayList<App> app = new ArrayList<>();
                     app.add(appItem);
-                    threatRemedIntent.putParcelableArrayListExtra("MaliciousApp", app);
+                    if (appItem.getMaliciousIPs().size() > 0){
+                        threatRemedIntent.putParcelableArrayListExtra("MaliciousIP", app);
+                    }
+                    else {
+
+                        threatRemedIntent.putParcelableArrayListExtra("MaliciousApp", app);
+                    }
                     context.startActivity(threatRemedIntent);
                 }
             }
