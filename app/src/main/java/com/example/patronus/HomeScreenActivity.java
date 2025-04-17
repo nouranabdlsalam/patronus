@@ -7,6 +7,7 @@ import android.net.wifi.ScanResult;
 import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
@@ -56,6 +57,17 @@ public class HomeScreenActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+//        IPScanner collector = new IPScanner(getApplicationContext());
+//        collector.getAllConnections();
+
+        Intent bgServiceIntent = new Intent(getApplicationContext(), BgReceiverService.class);
+        startService(bgServiceIntent);
+
+//        Intent networkServiceIntent = new Intent(getApplicationContext(), NetworkMonitorService.class);
+//        startService(networkServiceIntent);
+//        Log.d("HOME", "onCreate: Started");
+
 //
 //        // Initialize UI components
 //        ssidText = findViewById(R.id.ssidText);

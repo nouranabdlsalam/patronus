@@ -11,43 +11,52 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/bubble_bg"
-        android:gravity="center_vertical"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:weightSum="3"
+        android:background="@drawable/bubble_bg">
 
-        <ImageView
-            android:id="@+id/btnBack"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginBottom="8dp"
-            android:src="@drawable/back_btn" />
+        <ImageButton
+            android:id="@+id/settings_back"
+            android:layout_width="wrap_content"
+            android:layout_height="48dp"
+            android:src="@drawable/back"
+            android:scaleType="fitCenter"
+            android:background="@color/blue"
+            android:layout_marginBottom="10dp"
+            android:layout_weight="1"
+            android:layout_gravity="center_vertical"
+            android:contentDescription="back" />
 
         <TextView
-            android:id="@+id/tvTitle"
+            android:id="@+id/settings_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginBottom="10dp"
-            android:gravity="center"
             android:text="Settings"
-            android:textColor="#FFFFFF"
-            android:textSize="35sp"
-            android:textStyle="bold" />
+            android:textSize="30sp"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="45dp"
+            android:textStyle="bold"
+            android:textColor="@color/white"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:shadowColor="@color/light_navy"
+            android:shadowRadius="6"
+            android:shadowDy="7"/>
+
     </LinearLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
-        android:background="@drawable/box_bg"
+        android:background="@drawable/light_navy_bg"
         android:padding="10dp">
 
         <TextView
             android:id="@+id/AutoThreatTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Auto Threat"
+            android:text="Wi-Fi Scanning"
             android:textColor="#FFFFFF"
             android:textSize="25sp"
             android:textStyle="bold"
@@ -59,34 +68,38 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
-            android:text="Automatically mitigate the threats."
+            android:text="Scans Wi-Fi network upon connection."
             android:textColor="#FFFFFF"
             android:textSize="20sp"
-            app:layout_constraintEnd_toStartOf="@id/AutoThreatSwitch"
+            app:layout_constraintEnd_toStartOf="@id/PreconSwitch"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/AutoThreatTitle" />
 
-        <Switch
-            android:id="@+id/AutoThreatSwitch"
-            android:layout_width="48dp"
-            android:layout_height="48dp"
+        <com.google.android.material.materialswitch.MaterialSwitch
+            android:id="@+id/PreconSwitch"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:thumbTint="@color/white"
+            app:trackTint="@color/switch_track_selector"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
-        android:background="@drawable/box_bg"
+        android:background="@drawable/light_navy_bg"
         android:padding="10dp">
 
         <TextView
             android:id="@+id/VPNTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="VPN"
+            android:text="Network Monitoring"
             android:textColor="#FFFFFF"
             android:textSize="25sp"
             android:textStyle="bold"
@@ -98,17 +111,19 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
-            android:text="Ensure private communication and prevent data interception."
+            android:text="Continuously monitors apps for suspicious network activity. "
             android:textColor="#FFFFFF"
             android:textSize="20sp"
-            app:layout_constraintEnd_toStartOf="@id/VPNSwitch"
+            app:layout_constraintEnd_toStartOf="@id/networkMonitoringSwitch"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/VPNTitle" />
 
-        <Switch
-            android:id="@+id/VPNSwitch"
-            android:layout_width="48dp"
-            android:layout_height="48dp"
+        <com.google.android.material.materialswitch.MaterialSwitch
+            android:id="@+id/networkMonitoringSwitch"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:thumbTint="@color/white"
+            app:trackTint="@color/switch_track_selector"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -118,7 +133,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
-        android:background="@drawable/box_bg"
+        android:background="@drawable/light_navy_bg"
         android:padding="10dp">
 
         <TextView
@@ -144,14 +159,13 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/SecModeTitle" />
 
-        <Button
+        <ImageButton
             android:id="@+id/SecModeSwitch"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@android:color/transparent"
-            android:text="›"
-            android:textColor="#FFFFFF"
-            android:textSize="40sp"
+            android:src="@drawable/next"
+            android:scaleType="fitCenter"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -162,7 +176,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
-        android:background="@drawable/box_bg"
+        android:background="@drawable/light_navy_bg"
         android:padding="10dp">
 
         <TextView
@@ -188,58 +202,13 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/TrustedNetworksTitle" />
 
-        <Button
+        <ImageButton
             android:id="@+id/TrustedNetworksSwitch"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@android:color/transparent"
-            android:text="›"
-            android:textColor="#FFFFFF"
-            android:textSize="40sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            />
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="10dp"
-        android:background="@drawable/box_bg"
-        android:padding="10dp">
-
-        <TextView
-            android:id="@+id/BlockedIPAddressesTitle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Blocked IP Addresses"
-            android:textColor="#FFFFFF"
-            android:textSize="25sp"
-            android:textStyle="bold"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <TextView
-            android:id="@+id/BlockedIPAddressesDescription"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="4dp"
-            android:text="View and unblock blocked IPs."
-            android:textColor="#FFFFFF"
-            android:textSize="20sp"
-            app:layout_constraintEnd_toStartOf="@id/BlockedIPAddressesSwitch"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/BlockedIPAddressesTitle" />
-
-        <Button
-            android:id="@+id/BlockedIPAddressesSwitch"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@android:color/transparent"
-            android:text="›"
-            android:textColor="#FFFFFF"
-            android:textSize="40sp"
+            android:src="@drawable/next"
+            android:scaleType="fitCenter"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -272,10 +241,13 @@
                 app:layout_constraintStart_toStartOf="parent"
                 tools:ignore="MissingConstraints">
 
-                <ImageView
+                <ImageButton
+                    android:id="@+id/settings_home"
                     android:layout_width="30dp"
                     android:layout_height="30dp"
-                    android:src="@drawable/home" />
+                    android:src="@drawable/home"
+                    android:scaleType="fitCenter"
+                    android:background="@android:color/transparent"/>
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -294,10 +266,13 @@
                 app:layout_constraintStart_toEndOf="@id/nav_home"
                 tools:ignore="MissingConstraints">
 
-                <ImageView
+                <ImageButton
+                    android:id="@+id/settings_scan"
                     android:layout_width="30dp"
                     android:layout_height="30dp"
-                    android:src="@drawable/scan" />
+                    android:src="@drawable/scan"
+                    android:scaleType="fitCenter"
+                    android:background="@android:color/transparent"/>
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -340,10 +315,13 @@
                 app:layout_constraintStart_toEndOf="@id/nav_settings"
                 tools:ignore="MissingConstraints">
 
-                <ImageView
+                <ImageButton
+                    android:id="@+id/settings_help"
                     android:layout_width="30dp"
                     android:layout_height="30dp"
-                    android:src="@drawable/help" />
+                    android:src="@drawable/help"
+                    android:scaleType="fitCenter"
+                    android:background="@android:color/transparent"/>
 
                 <TextView
                     android:layout_width="wrap_content"

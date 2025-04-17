@@ -50,7 +50,7 @@ public class SelectAppActivity extends AppCompatActivity {
         scrollView = findViewById(R.id.trusted_networks_scroll);
 
         ViewGroup.LayoutParams layoutParams = scrollView.getLayoutParams();
-        layoutParams.height = 1100;
+        layoutParams.height = 600;
         scrollView.setLayoutParams(layoutParams);
 
         navbar = findViewById(R.id.navigationBar);

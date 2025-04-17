@@ -54,18 +54,31 @@ public class MaliciousAppsActivity extends AppCompatActivity {
         navbar = findViewById(R.id.navigationBar);
         navbar.setVisibility(View.GONE);
 
-        List<App> allApps = getIntent().getParcelableArrayListExtra("malwareApps");
-        if (allApps == null) {
-            Log.d("AppData", "Received malware list is NULL.");
-        } else {
-            Log.d("AppData", "Size of malware apps list: " + allApps.size());
+        List<App> allApps = new ArrayList<>();
+        boolean malware = false;
+        if (getIntent().hasExtra("malwareApps")){
+            malware = true;
+            allApps = getIntent().getParcelableArrayListExtra("malwareApps");
+            if (allApps == null) {
+                Log.d("AppData", "Received malware list is NULL.");
+            } else {
+                Log.d("AppData", "Size of malware apps list: " + allApps.size());
+            }
+        }
+        else {
+            allApps = getIntent().getParcelableArrayListExtra("MaliciousIP");
         }
 
         if (allApps.isEmpty()){
             text.setText("No malicious apps were found.");
         }
-        else{
-            text.setText("These apps request dangerous permissions and might be malicious. Click on an app to take action.");
+        else {
+            if (malware){
+                text.setText("These apps request dangerous permissions and might be malicious. Click on an app to take action.");
+            }
+            else{
+                text.setText("These apps communicate with suspicious IPs and might be malicious. Click on an app to take action.");
+            }
             recyclerView.setLayoutManager(new LinearLayoutManager(this));
             AppListAdapter adapter = new AppListAdapter(getApplicationContext(), allApps);
             recyclerView.setAdapter(adapter);
