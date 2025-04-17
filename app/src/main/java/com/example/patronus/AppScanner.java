@@ -31,10 +31,10 @@ public class AppScanner {
         Log.d("SCANNING:", app.getFeatures()[0] + " ");
         app.setFeatures(extractFeatures(app));
         Log.d("SCANNING:", "set features for: " + app.getPackageName());
-        double classification = classify(app);
-        ApplicationInfo appInfo = context.getPackageManager().getApplicationInfo(app.getPackageName(), 0);
-        int category = appInfo.category;
-        int contextClassification = getContextAwareScore(classification, category);
+        double modelConfidence = classify(app);
+        int category = getAppCategory(app);
+        int sideloadingScore = getSideloadingScore(app);
+        int contextClassification = getContextAwareScore(modelConfidence, category, sideloadingScore);
         return contextClassification;
     }
 
@@ -234,7 +234,30 @@ public class AppScanner {
         return classification;
     }
 
-    public int getContextAwareScore(double classification, int category){
+    public int getContextAwareScore(double modelConfidence, int category, int sideloadingScore){
+        double categoryRisk = getCategoryRisk(category);
+        double contextAwareScore = 0.6 * modelConfidence + 0.2 * categoryRisk + 0.2 * sideloadingScore;
+        Log.d("CONTEXT", "model confidence: " + modelConfidence + ", category: " + category + ", sideloading score: " + sideloadingScore + ", context score: " + contextAwareScore);
+        return contextAwareScore > 0.7 ? 1 : 0;
+    }
+
+    public int getAppCategory(App app) throws PackageManager.NameNotFoundException {
+        ApplicationInfo appInfo = context.getPackageManager().getApplicationInfo(app.getPackageName(), 0);
+        return appInfo.category;
+    }
+
+    public int getSideloadingScore(App app){
+        String installer = context.getPackageManager().getInstallerPackageName(app.getPackageName());
+        int sideloadingScore;
+        if (installer == null || !installer.equals("com.android.vending")) {
+            sideloadingScore = 1;
+        } else {
+            sideloadingScore = -1;
+        }
+        return sideloadingScore;
+    }
+
+    public double getCategoryRisk(int category){
         double categoryRisk;
         switch (category){
             case 8: // Category for apps which are primarily accessibility apps, such as screen-readers. (src: Android Docs)
@@ -270,9 +293,6 @@ public class AppScanner {
             default:
                 categoryRisk = 0.5;
         }
-
-        return (((0.6 * classification + 0.4 * categoryRisk) > 0.7) ? 1 : 0);
-
+        return  categoryRisk;
     }
-
 }
