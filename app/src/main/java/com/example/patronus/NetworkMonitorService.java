@@ -21,16 +21,23 @@ public class NetworkMonitorService extends Service {
     private Handler handler = new Handler();
     private Runnable stopTask;
     ArrayList<App> appConnections = new ArrayList<>();
+    SharedPreferencesManager sharedPreferencesManager;
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
         Log.d("NETWORK MONITOR", " Started Service");
+        sharedPreferencesManager = new SharedPreferencesManager(getApplicationContext());
 
         new Thread(() -> {
             IPScanner scanner = new IPScanner(this);
             long endTime = System.currentTimeMillis() + 30_000;
 
             while (System.currentTimeMillis() < endTime) {
+                if (!sharedPreferencesManager.isNetworkMonitoringOn()){
+                    Log.d("NETWORK MONITOR", "Network Monitoring is OFF. Stopping Service.");
+                    stopSelf();
+                    return;
+                }
                 appConnections = scanner.getAllConnections(); // or your enhanced one
 
                 try {
