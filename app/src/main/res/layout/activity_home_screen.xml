@@ -1,11 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/navy"
     tools:context=".HomeScreenActivity">
+
+    <ScrollView
+        android:id="@+id/scrollView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/navigationBar"
+        android:layout_alignParentTop="true"
+        android:fillViewport="true">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -17,8 +25,21 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:gravity="center"
+            android:weightSum="3"
             android:background="@drawable/bubble_bg">
+
+            <ImageButton
+                android:layout_width="wrap_content"
+                android:layout_height="48dp"
+                android:src="@drawable/back"
+                android:scaleType="fitCenter"
+                android:background="@color/blue"
+                android:layout_marginBottom="10dp"
+                android:layout_weight="1"
+                android:layout_gravity="center_vertical"
+                android:contentDescription="Back Button" />
+
+
 
             <TextView
                 android:layout_width="wrap_content"
@@ -227,9 +248,7 @@
                 <ImageView
                     android:layout_width="40dp"
                     android:layout_height="40dp"
-                    android:src="@drawable/vpn"
-
-                    />
+                    android:src="@drawable/vpn" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -274,25 +293,54 @@
                     android:textColor="@color/white" />
             </LinearLayout>
         </LinearLayout>
-        <!-- Navigation Bar -->
-        <androidx.constraintlayout.widget.ConstraintLayout
+
+
+        <TextView
+            android:id="@+id/networkCenterTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Network Center:"
+            android:textColor="@color/white"
+            android:textSize="17sp"
+            android:paddingStart="30dp"
+            android:textStyle="bold"/>
+
+        <Button
+            android:id="@+id/networkCenter_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Go to Network Center"
+            android:textColor="@color/white"
+            android:textSize="16sp"
+            android:paddingLeft="30dp"
+            android:paddingRight="30dp"
+            android:layout_marginBottom="30dp"
+            android:layout_gravity="center"
+            android:elevation="4dp" />
+
+    </LinearLayout>
+
+    </ScrollView>
+
+        <LinearLayout
             android:id="@+id/navigationBar"
-            android:layout_width="0dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="#D3D3D3"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent">
+            android:layout_alignParentBottom="true"
+            android:orientation="horizontal"
+            android:padding="10dp"
+            android:gravity="center">
+
 
             <LinearLayout
                 android:id="@+id/nav_home"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:gravity="center"
+                android:layout_weight="1"
                 android:orientation="vertical"
-                app:layout_constraintEnd_toStartOf="@id/nav_scan"
-                app:layout_constraintStart_toStartOf="parent"
-                tools:ignore="MissingConstraints">
+               >
 
                 <ImageView
                     android:layout_width="30dp"
@@ -312,9 +360,8 @@
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:orientation="vertical"
-                app:layout_constraintEnd_toStartOf="@id/nav_settings"
-                app:layout_constraintStart_toEndOf="@id/nav_home"
-                tools:ignore="MissingConstraints">
+                android:layout_weight="1"
+                >
 
                 <ImageView
                     android:layout_width="30dp"
@@ -334,9 +381,8 @@
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:orientation="vertical"
-                app:layout_constraintEnd_toStartOf="@id/nav_help"
-                app:layout_constraintStart_toEndOf="@id/nav_scan"
-                tools:ignore="MissingConstraints">
+                android:layout_weight="1"
+                >
 
                 <ImageView
                     android:layout_width="30dp"
@@ -356,9 +402,8 @@
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:orientation="vertical"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@id/nav_settings"
-                tools:ignore="MissingConstraints">
+                android:layout_weight="1"
+                >
 
                 <ImageView
                     android:layout_width="30dp"
@@ -372,6 +417,5 @@
                     android:textSize="20sp" />
             </LinearLayout>
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
-    </LinearLayout>
-</ScrollView>
+        </LinearLayout>
+</RelativeLayout>
