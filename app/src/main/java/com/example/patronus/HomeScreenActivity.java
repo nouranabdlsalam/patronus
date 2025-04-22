@@ -47,6 +47,10 @@ public class HomeScreenActivity extends AppCompatActivity implements Wifi_precon
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_screen);
 
+        ////
+        Intent intent = new Intent(HomeScreenActivity.this, Help.class);
+        startActivity(intent);
+
         ssidText = findViewById(R.id.ssidText);
         bssidText = findViewById(R.id.bssidText);
         encryptionText = findViewById(R.id.encryptionText);

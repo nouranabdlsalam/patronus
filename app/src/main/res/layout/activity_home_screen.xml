@@ -18,42 +18,32 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:gravity="center">
+            android:orientation="vertical">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:weightSum="3"
-                android:background="@drawable/bubble_bg">
-
-                <ImageButton
-                    android:layout_width="wrap_content"
-                    android:layout_height="48dp"
-                    android:src="@drawable/back"
-                    android:scaleType="fitCenter"
-                    android:background="@color/blue"
-                    android:layout_marginBottom="10dp"
-                    android:layout_weight="1"
-                    android:layout_gravity="center_vertical"
-                    android:contentDescription="Back Button" />
-
-
+                android:background="@drawable/bubble_bg"
+                android:gravity="center">
 
                 <TextView
+                    android:id="@+id/home_screen_title"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="20dp"
-                    android:layout_marginBottom="45dp"
-                    android:text="@string/app_name"
-                    android:textColor="@color/white"
+                    android:text="Patronus"
                     android:textSize="30sp"
+                    android:layout_marginTop="23dp"
+                    android:layout_marginBottom="40dp"
                     android:textStyle="bold"
+                    android:textColor="@color/white"
+                    android:layout_weight="1"
                     android:gravity="center"
                     android:shadowColor="@color/light_navy"
-                    android:shadowDy="7"
-                    android:shadowRadius="6" />
+                    android:shadowRadius="6"
+                    android:shadowDy="7"/>
+
             </LinearLayout>
 
             <ImageView
@@ -235,7 +225,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:layout_marginBottom="20dp">
 
                 <LinearLayout
                     android:id="@+id/networkCenterBlock"
@@ -279,12 +270,15 @@
                 </LinearLayout>
 
                 <LinearLayout
+                    android:id="@+id/home_security_modes"
                     android:layout_width="145dp"
                     android:layout_height="114dp"
                     android:layout_margin="5dp"
                     android:background="@drawable/box_bg"
                     android:orientation="vertical"
-                    android:padding="15dp">
+                    android:padding="15dp"
+                    android:clickable="true"
+                    android:focusable="true">
 
                     <ImageView
                         android:layout_width="40dp"
@@ -317,7 +311,7 @@
         android:id="@+id/navigationBar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#D3D3D3"
+        android:background="#E2E3EC"
         android:layout_alignParentBottom="true"
         android:orientation="horizontal"
         android:padding="10dp"
@@ -331,18 +325,20 @@
             android:gravity="center"
             android:layout_weight="1"
             android:orientation="vertical"
-            >
+            android:clickable="true"
+            android:focusable="true">
 
             <ImageView
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:src="@drawable/home" />
+                android:layout_width="60dp"
+                android:layout_height="24dp"
+                android:src="@drawable/home"
+                android:background="@drawable/nav_selected" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Home"
-                android:textSize="20sp" />
+                android:textSize="15sp" />
         </LinearLayout>
 
         <LinearLayout
@@ -352,18 +348,20 @@
             android:gravity="center"
             android:orientation="vertical"
             android:layout_weight="1"
+            android:clickable="true"
+            android:focusable="true"
             >
 
             <ImageView
-                android:layout_width="30dp"
-                android:layout_height="30dp"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
                 android:src="@drawable/scan" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Scan"
-                android:textSize="20sp" />
+                android:textSize="15sp" />
         </LinearLayout>
 
         <LinearLayout
@@ -373,18 +371,20 @@
             android:gravity="center"
             android:orientation="vertical"
             android:layout_weight="1"
+            android:clickable="true"
+            android:focusable="true"
             >
 
             <ImageView
-                android:layout_width="30dp"
-                android:layout_height="30dp"
+                android:layout_width="26dp"
+                android:layout_height="26dp"
                 android:src="@drawable/settings" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Settings"
-                android:textSize="20sp" />
+                android:textSize="15sp" />
         </LinearLayout>
 
         <LinearLayout
@@ -394,18 +394,21 @@
             android:gravity="center"
             android:orientation="vertical"
             android:layout_weight="1"
+            android:clickable="true"
+            android:focusable="true"
             >
 
             <ImageView
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:src="@drawable/help" />
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:src="@drawable/help"
+                android:scaleType="centerCrop"/>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Help"
-                android:textSize="20sp" />
+                android:text="Helpbot"
+                android:textSize="15sp" />
         </LinearLayout>
 
     </LinearLayout>

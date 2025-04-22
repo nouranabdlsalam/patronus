@@ -24,28 +24,35 @@ import java.util.List;
 import org.json.JSONArray;
 import org.json.JSONObject;
 public class Help extends AppCompatActivity {
-    private static final String API_TOKEN = "Bearer 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"; // Replace this
-    private static final String API_URL = "https://apiinference.huggingface.co/models/mistralai/Mistral-7B-Instruct-v0.3";
-    // private EditText inputEditText;
+    private static final String API_TOKEN = "Bearer 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";
+    private static final String API_URL = "https://openrouter.ai/api/v1/chat/completions";
+// private EditText inputEditText;
     // private Button sendButton;
     // private TextView chatOutput;
+
+
     private EditText inputEditText;
     private Button sendButton;
     private RecyclerView chatRecyclerView;
     private ChatAdapter chatAdapter;
     private List<ChatMessage> chatMessages;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.help);
+
         inputEditText = findViewById(R.id.inputEditText);
         sendButton = findViewById(R.id.sendButton);
         chatRecyclerView = findViewById(R.id.chatRecyclerView);
+
         chatMessages = new ArrayList<>();
         chatAdapter = new ChatAdapter(chatMessages);
         chatRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         chatRecyclerView.setAdapter(chatAdapter);
+
+
         sendButton.setOnClickListener(v -> {
             String userInput = inputEditText.getText().toString();
             if (!userInput.isEmpty()) {
@@ -55,7 +62,9 @@ public class Help extends AppCompatActivity {
                 new QueryLLM().execute(userInput);
             }
         });
+
     }
+
 
     private class QueryLLM extends AsyncTask<String, Void, String> {
         @Override
@@ -67,8 +76,30 @@ public class Help extends AppCompatActivity {
                 connection.setRequestProperty("Authorization", API_TOKEN);
                 connection.setRequestProperty("Content-Type", "application/json");
                 connection.setDoOutput(true);
+
+                // Build JSON body
                 JSONObject jsonInput = new JSONObject();
-                jsonInput.put("inputs", "Human: " + params[0] + "\nAI:");
+                jsonInput.put("model", "mistral/ministral-8b"); // must match OpenRouter model name
+
+                JSONArray messages = new JSONArray();
+                JSONObject userMessage = new JSONObject();
+                userMessage.put("role", "user");
+                userMessage.put("content", params[0]);
+                messages.put(userMessage);
+
+                jsonInput.put("messages", messages);
+                jsonInput.put("temperature", 0.7); // optional
+                jsonInput.put("max_tokens", 300); // optional
+
+
+                JSONObject userMsg = new JSONObject();
+                userMsg.put("role", "user");
+                userMsg.put("content", params[0]);
+                messages.put(userMsg);
+                jsonInput.put("messages", messages);
+                Log.d("API Request JSON", jsonInput.toString());
+
+                // Send the request
                 OutputStream os = connection.getOutputStream();
                 BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(os,
                         "UTF-8"));
@@ -76,44 +107,52 @@ public class Help extends AppCompatActivity {
                 writer.flush();
                 writer.close();
                 os.close();
-                // Check the response code
+
                 int responseCode = connection.getResponseCode();
                 if (responseCode != HttpURLConnection.HTTP_OK) {
-                    return "HTTP error code: " + responseCode;
+                    InputStream errorStream = connection.getErrorStream();
+                    BufferedReader errorReader = new BufferedReader(new
+                            InputStreamReader(errorStream));
+                    StringBuilder errorResponse = new StringBuilder();
+                    String line;
+                    while ((line = errorReader.readLine()) != null) {
+                        errorResponse.append(line);
+                    }
+                    errorReader.close();
+                    return "HTTP error " + responseCode + ": " + errorResponse.toString();
                 }
-                // Read the API response
+
+                // Read response
                 InputStream inputStream = connection.getInputStream();
                 BufferedReader reader = new BufferedReader(new
                         InputStreamReader(inputStream));
+
                 StringBuilder response = new StringBuilder();
                 String line;
                 while ((line = reader.readLine()) != null) {
                     response.append(line);
                 }
+
                 reader.close();
                 inputStream.close();
-                // Handle array response format
-                JSONArray jsonArray = new JSONArray(response.toString());
-                if (jsonArray.length() > 0) {
-                    JSONObject obj = jsonArray.getJSONObject(0);
-                    if (obj.has("generated_text")) {
-                        String generatedText = obj.getString("generated_text");
-                        // Clean the response to show only the AI's answer
-                        // Remove "Human: <question>\nAI:" from the generated text
-                        String aiResponse = generatedText.replaceFirst("Human:.*\nAI:", "").trim();
-                        return aiResponse;
-                    }
+
+                // Parse JSON response
+                JSONObject jsonResponse = new JSONObject(response.toString());
+                JSONArray choices = jsonResponse.getJSONArray("choices");
+                if (choices.length() > 0) {
+                    JSONObject message = choices.getJSONObject(0).getJSONObject("message");
+                    return message.getString("content").trim();
                 }
-                return "Error: No response from the AI"; // Fallback in case the response is not
+
+                return "No response from the model.";
             } catch (Exception e) {
                 e.printStackTrace();
-                return "Error talking to chatbot!";
+                return "Error talking to the model: " + e.getMessage();
             }
         }
 
         @Override
         protected void onPostExecute(String result) {
-            Log.d("API Response", result);
             chatMessages.add(new ChatMessage(result, ChatMessage.TYPE_BOT));
             chatAdapter.notifyItemInserted(chatMessages.size() - 1);
         }
