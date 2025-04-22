@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import androidx.activity.EdgeToEdge;
@@ -17,9 +18,10 @@ import com.google.android.material.button.MaterialButton;
 import java.util.ArrayList;
 
 public class ThreatRemediation extends AppCompatActivity {
-    TextView attackTitle, attackDescription, title;
-    MaterialButton option1, option2;
+    TextView attackTitle, attackDescription;
+    MaterialButton option1;
     App MaliciousApp;
+    ImageButton back;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,13 +34,18 @@ public class ThreatRemediation extends AppCompatActivity {
             return insets;
         });
 
-        title = findViewById(R.id.tvTitle);
+        back = findViewById(R.id.threatback);
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+
         attackTitle = findViewById(R.id.attacktitle);
         attackDescription = findViewById(R.id.attackdescription);
         option1 = findViewById(R.id.manualremidiationoption1);
-        option2 = findViewById(R.id.manualremidiationoption2);
 
-        title.setText("Threat Remediation");
 
         if (getIntent().hasExtra("MaliciousApp")){
             ArrayList<App> MaliciousAppList = getIntent().getParcelableArrayListExtra("MaliciousApp");
@@ -85,6 +92,5 @@ public class ThreatRemediation extends AppCompatActivity {
             }
         });
 
-        option2.setVisibility(View.GONE);
     }
 }

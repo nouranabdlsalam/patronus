@@ -13,6 +13,7 @@
     import android.os.Build;
     import android.os.Bundle;
     import android.util.Log;
+    import android.view.View;
     import android.widget.ImageButton;
     import android.widget.RadioButton;
     import android.widget.TextView;
@@ -31,7 +32,7 @@
 
         WifiManager wifiManager;
         RadioButton radioBasic, radioAdvanced, radioTroubleshoot;
-        ImageButton scanButton;
+        ImageButton scanButton, back;
         final double[] downloadSpeedValue = {0f};
         final double[] uploadSpeedValue = {0f};
 
@@ -40,6 +41,14 @@
         protected void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
             setContentView(R.layout.activity_network_center);
+
+            back = findViewById(R.id.netcenterback);
+            back.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    finish();
+                }
+            });
 
             radioBasic = findViewById(R.id.rb_basic);
             radioAdvanced = findViewById(R.id.rb_advanced);

@@ -45,49 +45,8 @@
 
     </LinearLayout>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="10dp"
-        android:background="@drawable/light_navy_bg"
-        android:padding="10dp">
 
-        <TextView
-            android:id="@+id/AutoThreatTitle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Wi-Fi Scanning"
-            android:textColor="#FFFFFF"
-            android:textSize="25sp"
-            android:textStyle="bold"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <TextView
-            android:id="@+id/AutoThreatDescription"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="4dp"
-            android:text="Scans Wi-Fi network upon connection."
-            android:textColor="#FFFFFF"
-            android:textSize="20sp"
-            app:layout_constraintEnd_toStartOf="@id/PreconSwitch"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/AutoThreatTitle" />
-
-        <com.google.android.material.materialswitch.MaterialSwitch
-            android:id="@+id/PreconSwitch"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:thumbTint="@color/white"
-            app:trackTint="@color/switch_track_selector"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            />
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
+    <!-- Network Monitoring (now first) -->
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -111,7 +70,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
-            android:text="Continuously monitors apps for suspicious network activity. "
+            android:text="Continuously monitors apps for suspicious network activity."
             android:textColor="#FFFFFF"
             android:textSize="20sp"
             app:layout_constraintEnd_toStartOf="@id/networkMonitoringSwitch"
@@ -129,6 +88,7 @@
             app:layout_constraintTop_toTopOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
+    <!-- Malware Monitoring (now second) -->
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -137,10 +97,10 @@
         android:padding="10dp">
 
         <TextView
-            android:id="@+id/SecModeTitle"
+            android:id="@+id/AutoThreatTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Security Modes"
+            android:text="Malware Monitoring"
             android:textColor="#FFFFFF"
             android:textSize="25sp"
             android:textStyle="bold"
@@ -148,28 +108,68 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/SecModeDescription"
+            android:id="@+id/AutoThreatDescription"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
-            android:text="Select a security mode."
+            android:text="Automatically scan new apps for threats."
             android:textColor="#FFFFFF"
             android:textSize="20sp"
-            app:layout_constraintEnd_toStartOf="@id/SecModeSwitch"
+            app:layout_constraintEnd_toStartOf="@id/malwareSwitch"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/SecModeTitle" />
+            app:layout_constraintTop_toBottomOf="@id/AutoThreatTitle" />
 
-        <ImageButton
-            android:id="@+id/SecModeSwitch"
+        <com.google.android.material.materialswitch.MaterialSwitch
+            android:id="@+id/malwareSwitch"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@android:color/transparent"
-            android:src="@drawable/next"
-            android:scaleType="fitCenter"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
+            app:thumbTint="@color/white"
+            app:trackTint="@color/switch_track_selector"
             app:layout_constraintBottom_toBottomOf="parent"
-            />
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <!-- Balanced Mode (new third layout) -->
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:background="@drawable/light_navy_bg"
+        android:padding="10dp">
+
+        <TextView
+            android:id="@+id/BalancedModeTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Balanced Mode"
+            android:textColor="#FFFFFF"
+            android:textSize="25sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/BalancedModeDescription"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:text="Automatically chooses a security mode based on device state."
+            android:textColor="#FFFFFF"
+            android:textSize="20sp"
+            app:layout_constraintEnd_toStartOf="@id/BalancedModeSwitch"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/BalancedModeTitle" />
+
+        <com.google.android.material.materialswitch.MaterialSwitch
+            android:id="@+id/BalancedModeSwitch"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:thumbTint="@color/white"
+            app:trackTint="@color/switch_track_selector"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 
@@ -259,7 +259,7 @@
                 tools:ignore="MissingConstraints">
 
                 <ImageView
-                    android:layout_width="26dp"
+                    android:layout_width="60dp"
                     android:layout_height="26dp"
                     android:src="@drawable/settings"
                     android:background="@drawable/nav_selected"/>

@@ -96,10 +96,10 @@ public class SecurityModes extends AppCompatActivity {
         int batteryLevel = getBatteryLevel();
 
         if (isPowerSaveMode()) {
-            newMode = "LOW";
+            newMode = "LOW"; //turn off
             showToast("Power Save Mode detected");
         } else if (isDeviceCharging()) {
-            newMode = "HIGH";
+            newMode = "HIGH"; // turn on
             showToast("Charging: High Security Mode");
         } else if (isDeviceOverheating() && !isDeviceCharging() && isDeviceIdle()) {
             newMode = "HIGH";

@@ -38,12 +38,21 @@ public class Help extends AppCompatActivity {
     private RecyclerView chatRecyclerView;
     private ChatAdapter chatAdapter;
     private List<ChatMessage> chatMessages;
+    ImageButton back;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.help);
+
+        back = findViewById(R.id.helpback);
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
 
         LinearLayout nav_home= findViewById(R.id.nav_home);
         nav_home.setOnClickListener(new View.OnClickListener() {

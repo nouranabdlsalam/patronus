@@ -11,9 +11,6 @@ public class SharedPreferencesManager {
         prefs = context.getSharedPreferences("Settings", Context.MODE_PRIVATE);
     }
 
-    public boolean isPreconnectionScanningOn(){
-        return prefs.getBoolean("preconnectionScanning", true);
-    }
 
     public boolean isMalwareMonitoringOn(){
         return prefs.getBoolean("malwareMonitoring", true);
@@ -27,11 +24,6 @@ public class SharedPreferencesManager {
         return prefs.getBoolean("balancedMode", true);
     }
 
-    public void setPreconnectionScanningOn(boolean isEnabled){
-        SharedPreferences.Editor editor = prefs.edit();
-        editor.putBoolean("preconnectionScanning", isEnabled);
-        editor.apply();
-    }
 
     public void setMalwareMonitoringOn(boolean isEnabled){
         SharedPreferences.Editor editor = prefs.edit();
@@ -45,7 +37,7 @@ public class SharedPreferencesManager {
         editor.apply();
     }
 
-    public void setBalancedMode(boolean isEnabled){
+    public void setBalancedModeOn(boolean isEnabled){
         SharedPreferences.Editor editor = prefs.edit();
         editor.putBoolean("balancedMode", isEnabled);
         editor.apply();

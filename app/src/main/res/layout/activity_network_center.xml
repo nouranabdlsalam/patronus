@@ -15,6 +15,7 @@
         android:background="@drawable/bubble_bg">
 
         <ImageButton
+            android:id="@+id/netcenterback"
             android:layout_width="wrap_content"
             android:layout_height="48dp"
             android:src="@drawable/back"

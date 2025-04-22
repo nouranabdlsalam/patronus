@@ -4,25 +4,31 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
 import android.content.Intent;
-import android.media.Image;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
-import android.widget.Switch;
 
 import com.google.android.material.materialswitch.MaterialSwitch;
 
 public class SettingsActivity extends AppCompatActivity {
 
-    MaterialSwitch preconSwitch, networkSwitch;
+    MaterialSwitch malwareSwitch, networkSwitch, balancedSwitch;
     SharedPreferencesManager prefs;
-    ImageButton SecurityModes, TrustedNetworks, home, scan, help;
+    ImageButton back;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.settings);
+
+        back = findViewById(R.id.settings_back);
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
 
         LinearLayout nav_home= findViewById(R.id.nav_home);
         nav_home.setOnClickListener(new View.OnClickListener() {
@@ -54,53 +60,45 @@ public class SettingsActivity extends AppCompatActivity {
 
         prefs = new SharedPreferencesManager(this);
 
-        preconSwitch = findViewById(R.id.PreconSwitch);
+        malwareSwitch = findViewById(R.id.malwareSwitch);
         networkSwitch = findViewById(R.id.networkMonitoringSwitch);
+        balancedSwitch = findViewById(R.id.BalancedModeSwitch);
 
 
-        preconSwitch.setChecked(prefs.isPreconnectionScanningOn());
+        malwareSwitch.setChecked(prefs.isMalwareMonitoringOn());
         networkSwitch.setChecked(prefs.isNetworkMonitoringOn());
+        balancedSwitch.setChecked(prefs.isBalancedModeOn());
 
 
-        preconSwitch.setOnCheckedChangeListener((buttonView, isChecked) -> {
-            prefs.setPreconnectionScanningOn(isChecked);
-            restartBgReceiverService(this);
+        malwareSwitch.setOnCheckedChangeListener((buttonView, isChecked) -> {
+            prefs.setMalwareMonitoringOn(isChecked);
+            if (isChecked){
+                balancedSwitch.setChecked(false);
+                prefs.setBalancedModeOn(false);
+            }
+            restartSystemMonitoringService(this);
         });
 
 
         networkSwitch.setOnCheckedChangeListener((buttonView, isChecked) -> {
             prefs.setNetworkMonitoringOn(isChecked);
-            restartBgReceiverService(this);
+            restartSystemMonitoringService(this);
         });
 
-        SecurityModes = findViewById(R.id.SecModeSwitch);
-
-
-        SecurityModes.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(SettingsActivity.this, SecurityModesActivity.class);
-                startActivity(intent);
+        balancedSwitch.setOnCheckedChangeListener((buttonView, isChecked) -> {
+            prefs.setBalancedModeOn(isChecked);
+            if (isChecked){
+                malwareSwitch.setChecked(false);
+                prefs.setMalwareMonitoringOn(false);
             }
+            restartSystemMonitoringService(this);
         });
-
-        TrustedNetworks.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(SettingsActivity.this, TrustedNetworksActivity.class);
-                startActivity(intent);
-            }
-        });
-
-
-
 
 
     }
 
-    private static void restartBgReceiverService(Context context) {
-        Intent serviceIntent = new Intent(context, BgReceiverService.class);
-//        stopService(serviceIntent);
+    private static void restartSystemMonitoringService(Context context) {
+        Intent serviceIntent = new Intent(context, SystemMonitoringService.class);
         context.startService(serviceIntent);
     }
 

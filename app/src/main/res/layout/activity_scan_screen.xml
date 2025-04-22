@@ -16,6 +16,7 @@
         android:background="@drawable/bubble_bg">
 
         <ImageButton
+            android:id="@+id/scanback"
             android:layout_width="wrap_content"
             android:layout_height="48dp"
             android:src="@drawable/back"
@@ -136,7 +137,7 @@
             android:focusable="true">
 
             <ImageView
-                android:layout_width="24dp"
+                android:layout_width="60dp"
                 android:layout_height="24dp"
                 android:src="@drawable/scan"
                 android:background="@drawable/nav_selected"

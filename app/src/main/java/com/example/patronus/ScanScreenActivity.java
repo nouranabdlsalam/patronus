@@ -21,7 +21,7 @@ public class ScanScreenActivity extends AppCompatActivity {
     PackageManager packageManager;
     List<ApplicationInfo> InstalledAppsPm;
     ArrayList<App> malware;
-    ImageButton scanButton;
+    ImageButton scanButton, back;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,6 +30,14 @@ public class ScanScreenActivity extends AppCompatActivity {
         allApps = findViewById(R.id.all_apps_radio);
         selectApps = findViewById(R.id.select_apps_radio);
         scanButton = findViewById(R.id.malware_scan);
+        back = findViewById(R.id.scanback);
+
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
 
         LinearLayout nav_home= findViewById(R.id.nav_home);
         nav_home.setOnClickListener(new View.OnClickListener() {

@@ -71,6 +71,9 @@
             android:name=".ScanScreenActivity"
             android:exported="false" />
         <activity
+            android:name=".SettingsActivity"
+            android:exported="false" />
+        <activity
             android:name=".HomeScreenActivity"
             android:exported="true">
             <intent-filter>
@@ -82,13 +85,15 @@
 
 
         <service
-            android:name=".SecureVpnService"
+            android:name=".SystemMonitoringService"
             android:exported="true"
-            android:permission="android.permission.BIND_VPN_SERVICE">
-            <intent-filter>
-                <action android:name="android.net.VpnService" />
-            </intent-filter>
-        </service>
+            android:foregroundServiceType="dataSync" />
+
+        <service
+            android:name=".NetworkMonitorService"
+            android:exported="true"
+            android:foregroundServiceType="dataSync" />
+
     </application>
 
 </manifest>
