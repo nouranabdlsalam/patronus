@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
@@ -26,6 +27,7 @@ public class SelectAppActivity extends AppCompatActivity {
     Button done;
     ScrollView scrollView;
     static ArrayList<App> selectedApps = new ArrayList<>();
+    LinearLayout navbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,8 +50,11 @@ public class SelectAppActivity extends AppCompatActivity {
         scrollView = findViewById(R.id.trusted_networks_scroll);
 
         ViewGroup.LayoutParams layoutParams = scrollView.getLayoutParams();
-        layoutParams.height = 1100;
+        layoutParams.height = 600;
         scrollView.setLayoutParams(layoutParams);
+
+        navbar = findViewById(R.id.navigationBar);
+        navbar.setVisibility(View.GONE);
 
 
         List<App> allApps = getIntent().getParcelableArrayListExtra("allApps");

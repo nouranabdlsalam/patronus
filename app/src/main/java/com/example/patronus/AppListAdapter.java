@@ -1,6 +1,7 @@
 package com.example.patronus;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -8,6 +9,7 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class AppListAdapter extends RecyclerView.Adapter<ListViewHolder> {
@@ -47,6 +49,19 @@ public class AppListAdapter extends RecyclerView.Adapter<ListViewHolder> {
                     SelectAppActivity.setSelectedApps(appItem.getPackageName(), appItem.getName(), 1);
                     holder.trash.setImageResource(R.drawable.add);
                     appItem.setIcon(0);
+                }
+                else {
+                    Intent threatRemedIntent = new Intent(context, ThreatRemediation.class);
+                    ArrayList<App> app = new ArrayList<>();
+                    app.add(appItem);
+                    if (appItem.getMaliciousIPs().size() > 0){
+                        threatRemedIntent.putParcelableArrayListExtra("MaliciousIP", app);
+                    }
+                    else {
+
+                        threatRemedIntent.putParcelableArrayListExtra("MaliciousApp", app);
+                    }
+                    context.startActivity(threatRemedIntent);
                 }
             }
         });

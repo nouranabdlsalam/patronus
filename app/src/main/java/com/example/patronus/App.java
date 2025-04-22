@@ -8,15 +8,31 @@ import android.os.Parcelable;
 
 import androidx.core.content.ContextCompat;
 
+import java.util.ArrayList;
+
 public class App implements Parcelable {
     String packageName, name;
     int [] features;
-    int icon;
+    int icon, uid;
+    ArrayList<String> IPs;
 
+    ArrayList<String> maliciousIPs;
+
+    long txBytes, rxBytes;
     public App(String packageName, String name){
         this.packageName = packageName;
         this.features = new int[28];
         this.name = name;
+        this.IPs = new ArrayList<>();
+        this.maliciousIPs = new ArrayList<>();
+    }
+
+    public ArrayList<String> getMaliciousIPs() {
+        return maliciousIPs;
+    }
+
+    public void setMaliciousIPs(ArrayList<String> maliciousIPs) {
+        this.maliciousIPs = maliciousIPs;
     }
 
     public String getName() {
@@ -51,12 +67,46 @@ public class App implements Parcelable {
         this.icon = icon;
     }
 
+    public int getUid() {
+        return uid;
+    }
+
+    public void setUid(int uid) {
+        this.uid = uid;
+    }
+
+    public ArrayList<String> getIPs() {
+        return IPs;
+    }
+
+    public void setIPs(ArrayList<String> IPs) {
+        this.IPs = IPs;
+    }
+
+    public long getTxBytes() {
+        return txBytes;
+    }
+
+    public void setTxBytes(long txBytes) {
+        this.txBytes = txBytes;
+    }
+
+    public long getRxBytes() {
+        return rxBytes;
+    }
+
+    public void setRxBytes(long rxBytes) {
+        this.rxBytes = rxBytes;
+    }
+
     // Parcelable methods
     protected App(Parcel in) {
         packageName = in.readString();
         features = in.createIntArray();
         name = in.readString();
         icon = in.readInt();
+        IPs = in.createStringArrayList();
+        maliciousIPs = in.createStringArrayList();
     }
 
     @Override
@@ -65,6 +115,8 @@ public class App implements Parcelable {
         dest.writeIntArray(features);
         dest.writeString(name);
         dest.writeInt(icon);
+        dest.writeStringList(IPs);
+        dest.writeStringList(maliciousIPs);
     }
 
     @Override

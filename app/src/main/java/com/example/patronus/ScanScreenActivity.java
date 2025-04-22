@@ -81,10 +81,12 @@ public class ScanScreenActivity extends AppCompatActivity {
 
         for (ApplicationInfo app: InstalledAppsPm) {
             if ((app.flags & (ApplicationInfo.FLAG_SYSTEM | ApplicationInfo.FLAG_UPDATED_SYSTEM_APP)) == 0) {
-                Log.d("AppDebug", "Adding app: " + app.packageName);
-                App currentApp = new App(app.packageName, app.loadLabel(packageManager).toString());
-                currentApp.setIcon(0);
-                allApps.add(currentApp);
+                if (!app.packageName.equals(getPackageName())){
+                    Log.d("AppDebug", "Adding app: " + app.packageName);
+                    App currentApp = new App(app.packageName, app.loadLabel(packageManager).toString());
+                    currentApp.setIcon(0);
+                    allApps.add(currentApp);
+                }
             }
         }
         return allApps;
