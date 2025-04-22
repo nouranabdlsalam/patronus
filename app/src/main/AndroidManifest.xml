@@ -52,7 +52,7 @@
             android:name=".SecurityModes"
             android:exported="false" />
         <activity
-            android:name=".HomeScreenActivity"
+            android:name=".Help"
             android:exported="false" />
 
         <activity
@@ -71,7 +71,7 @@
             android:name=".ScanScreenActivity"
             android:exported="false" />
         <activity
-            android:name=".Help"
+            android:name=".HomeScreenActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -79,7 +79,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".VpnControlActivity" />
+
 
         <service
             android:name=".SecureVpnService"

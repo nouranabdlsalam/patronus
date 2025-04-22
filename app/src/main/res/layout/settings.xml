@@ -172,48 +172,7 @@
             />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="10dp"
-        android:background="@drawable/light_navy_bg"
-        android:padding="10dp">
 
-        <TextView
-            android:id="@+id/TrustedNetworksTitle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Trusted Networks"
-            android:textColor="#FFFFFF"
-            android:textSize="25sp"
-            android:textStyle="bold"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <TextView
-            android:id="@+id/TrustedNetworksDescription"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="4dp"
-            android:text="View trusted networks."
-            android:textColor="#FFFFFF"
-            android:textSize="20sp"
-            app:layout_constraintEnd_toStartOf="@id/TrustedNetworksSwitch"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/TrustedNetworksTitle" />
-
-        <ImageButton
-            android:id="@+id/TrustedNetworksSwitch"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@android:color/transparent"
-            android:src="@drawable/next"
-            android:scaleType="fitCenter"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            />
-    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
@@ -224,9 +183,10 @@
         <!-- Navigation Bar -->
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/navigationBar"
-            android:layout_width="0dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="#D3D3D3"
+            android:background="#E2E3EC"
+            android:orientation="horizontal"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent">
@@ -237,23 +197,25 @@
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:orientation="vertical"
+                android:clickable="true"
+                android:focusable="true"
+                android:layout_weight="1"
                 app:layout_constraintEnd_toStartOf="@id/nav_scan"
                 app:layout_constraintStart_toStartOf="parent"
                 tools:ignore="MissingConstraints">
 
-                <ImageButton
+                <ImageView
                     android:id="@+id/settings_home"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
+                    android:layout_width="60dp"
+                    android:layout_height="24dp"
                     android:src="@drawable/home"
-                    android:scaleType="fitCenter"
-                    android:background="@android:color/transparent"/>
+                    />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Home"
-                    android:textSize="20sp" />
+                    android:textSize="15sp" />
             </LinearLayout>
 
             <LinearLayout
@@ -262,23 +224,25 @@
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:orientation="vertical"
+                android:layout_weight="1"
+                android:clickable="true"
+                android:focusable="true"
                 app:layout_constraintEnd_toStartOf="@id/nav_settings"
                 app:layout_constraintStart_toEndOf="@id/nav_home"
                 tools:ignore="MissingConstraints">
 
-                <ImageButton
+                <ImageView
                     android:id="@+id/settings_scan"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
                     android:src="@drawable/scan"
-                    android:scaleType="fitCenter"
-                    android:background="@android:color/transparent"/>
+                   />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Scan"
-                    android:textSize="20sp" />
+                    android:textSize="15sp" />
             </LinearLayout>
 
             <LinearLayout
@@ -287,14 +251,16 @@
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:orientation="vertical"
+                android:layout_weight="1"
+                android:clickable="true"
+                android:focusable="true"
                 app:layout_constraintEnd_toStartOf="@id/nav_help"
                 app:layout_constraintStart_toEndOf="@id/nav_scan"
                 tools:ignore="MissingConstraints">
 
                 <ImageView
-                    android:layout_marginTop="5dp"
-                    android:layout_width="60dp"
-                    android:layout_height="30dp"
+                    android:layout_width="26dp"
+                    android:layout_height="26dp"
                     android:src="@drawable/settings"
                     android:background="@drawable/nav_selected"/>
 
@@ -302,7 +268,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Settings"
-                    android:textSize="20sp" />
+                    android:textSize="15sp" />
             </LinearLayout>
 
             <LinearLayout
@@ -311,23 +277,26 @@
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:orientation="vertical"
+                android:layout_weight="1"
+                android:clickable="true"
+                android:focusable="true"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@id/nav_settings"
                 tools:ignore="MissingConstraints">
 
-                <ImageButton
+                <ImageView
                     android:id="@+id/settings_help"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
                     android:src="@drawable/help"
-                    android:scaleType="fitCenter"
-                    android:background="@android:color/transparent"/>
+
+                    />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Help"
-                    android:textSize="20sp" />
+                    android:text="Helpbot"
+                    android:textSize="15sp" />
             </LinearLayout>
 
         </androidx.constraintlayout.widget.ConstraintLayout>

@@ -47,9 +47,7 @@ public class HomeScreenActivity extends AppCompatActivity implements Wifi_precon
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_screen);
 
-        ////
-        Intent intent = new Intent(HomeScreenActivity.this, Help.class);
-        startActivity(intent);
+
 
         ssidText = findViewById(R.id.ssidText);
         bssidText = findViewById(R.id.bssidText);
@@ -69,6 +67,36 @@ public class HomeScreenActivity extends AppCompatActivity implements Wifi_precon
                 startActivity(intent);
             }
         });
+
+        LinearLayout nav_scan= findViewById(R.id.nav_scan);
+        nav_scan.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(HomeScreenActivity.this, ScanScreenActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        LinearLayout nav_settings= findViewById(R.id.nav_settings);
+        nav_settings.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(HomeScreenActivity.this, SettingsActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        LinearLayout nav_help= findViewById(R.id.nav_help);
+        nav_help.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(HomeScreenActivity.this, Help.class);
+                startActivity(intent);
+            }
+        });
+
+
+
 
         // registerReceiver(wifiScanner.getReceiver(), new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION));
 

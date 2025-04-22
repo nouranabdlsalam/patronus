@@ -1,8 +1,10 @@
 package com.example.patronus;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -43,6 +45,32 @@ public class Help extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.help);
 
+        LinearLayout nav_home= findViewById(R.id.nav_home);
+        nav_home.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Help.this, HomeScreenActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        LinearLayout nav_settings= findViewById(R.id.nav_settings);
+        nav_settings.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Help.this, SettingsActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        LinearLayout nav_scan= findViewById(R.id.nav_scan);
+        nav_scan.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Help.this, ScanScreenActivity.class);
+                startActivity(intent);
+            }
+        });
         inputEditText = findViewById(R.id.inputEditText);
         sendButton = findViewById(R.id.sendButton);
         chatRecyclerView = findViewById(R.id.chatRecyclerView);

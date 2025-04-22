@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
+import android.widget.LinearLayout;
 import android.widget.RadioButton;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -29,6 +30,33 @@ public class ScanScreenActivity extends AppCompatActivity {
         allApps = findViewById(R.id.all_apps_radio);
         selectApps = findViewById(R.id.select_apps_radio);
         scanButton = findViewById(R.id.malware_scan);
+
+        LinearLayout nav_home= findViewById(R.id.nav_home);
+        nav_home.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(ScanScreenActivity.this, HomeScreenActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        LinearLayout nav_settings= findViewById(R.id.nav_settings);
+        nav_settings.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(ScanScreenActivity.this, SettingsActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        LinearLayout nav_help= findViewById(R.id.nav_help);
+        nav_help.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(ScanScreenActivity.this, Help.class);
+                startActivity(intent);
+            }
+        });
 
         selectedApps = new ArrayList<App>();
 

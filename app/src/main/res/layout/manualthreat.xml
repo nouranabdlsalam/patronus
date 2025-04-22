@@ -8,56 +8,58 @@
     android:layout_height="match_parent"
     android:background="#282F41"
     tools:context=".ThreatRemediation">
-    <LinearLayout
+
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:layout_height="0dp"
+        android:layout_marginBottom="90dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/navigationBar">
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/bubble_bg"
-            android:gravity="center_vertical"
-            android:orientation="horizontal"
-            tools:ignore="MissingConstraints">
+            android:orientation="vertical">
 
-            <ImageView
-                android:id="@+id/btnBack"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:layout_marginStart="16dp"
-                android:layout_marginBottom="8dp"
-                android:src="@drawable/back_btn" />
-
-            <TextView
-                android:id="@+id/tvTitle"
-                android:layout_width="wrap_content"
+            <!-- Top Bar -->
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginBottom="10dp"
-                android:gravity="center"
-                android:text="Manual Threat Remediation"
-                android:textColor="#FFFFFF"
-                android:textSize="26sp"
-                android:textStyle="bold" />
-        </LinearLayout>
+                android:background="@drawable/bubble_bg"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:padding="10dp">
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            >
+                <ImageView
+                    android:id="@+id/btnBack"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_marginStart="16dp"
+                    android:src="@drawable/back_btn" />
+
+                <TextView
+                    android:id="@+id/tvTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="5dp"
+                    android:text="Manual Threat Remediation"
+                    android:textColor="#FFFFFF"
+                    android:textSize="26sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+            <!-- Threat Details -->
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Threat Details:"
                 android:textStyle="bold"
-                android:textColor="#ffff"
-                android:textSize="25dp"
+                android:textColor="#FFFFFF"
+                android:textSize="20sp"
                 android:layout_marginLeft="15dp"
-                />
+                android:layout_marginTop="20dp" />
+
             <androidx.cardview.widget.CardView
-                xmlns:android="http://schemas.android.com/apk/res/android"
-                xmlns:app="http://schemas.android.com/apk/res-auto"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="16dp"
@@ -71,7 +73,6 @@
                     android:orientation="vertical"
                     android:padding="16dp">
 
-                    <!-- Main Title -->
                     <TextView
                         android:id="@+id/attacktitle"
                         android:layout_width="wrap_content"
@@ -81,7 +82,6 @@
                         android:textSize="18sp"
                         android:textStyle="bold" />
 
-                    <!-- Subtitle / Description -->
                     <TextView
                         android:id="@+id/attackdescription"
                         android:layout_width="wrap_content"
@@ -89,163 +89,156 @@
                         android:text="Someone is trying to disconnect you from the network!"
                         android:textColor="#CCCCCC"
                         android:textSize="14sp"
-                        android:layout_marginTop="4dp"/>
+                        android:layout_marginTop="4dp" />
 
                 </LinearLayout>
-
             </androidx.cardview.widget.CardView>
 
+            <!-- Remediation Options -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Remediation Options:"
+                android:textStyle="bold"
+                android:textColor="#FFFFFF"
+                android:textSize="20sp"
+                android:layout_marginLeft="15dp"
+                android:layout_marginTop="10dp" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/manualremidiationoption1"
+                android:layout_width="319dp"
+                android:layout_height="57dp"
+                app:cornerRadius="9dp"
+                android:backgroundTint="#B30199E2"
+                android:text="Block Attacker’s IP"
+                android:layout_gravity="center"
+                android:textStyle="bold"
+                android:textSize="18sp"
+                android:layout_marginTop="25dp" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/manualremidiationoption2"
+                android:layout_width="319dp"
+                android:layout_height="57dp"
+                app:cornerRadius="9dp"
+                android:backgroundTint="#B30199E2"
+                android:text="Disconnect from the Network"
+                android:layout_gravity="center"
+                android:textStyle="bold"
+                android:textSize="18sp"
+                android:layout_marginTop="25dp" />
 
         </LinearLayout>
+    </ScrollView>
+
+    <!-- Bottom Navigation Bar -->
     <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        >
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Remediation Options:"
-            android:textStyle="bold"
-            android:textColor="#ffff"
-            android:textSize="25dp"
-            android:layout_marginLeft="15dp"
-            />
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/manualremidiationoption1"
-            android:layout_width="319dp"
-            android:layout_height="57dp"
-            app:cornerRadius="9dp"
-            android:backgroundTint="#B30199E2"
-            android:text="Block Attacker’s IP"
-            android:layout_gravity="center"
-            android:textStyle="bold"
-            android:textSize="22sp"
-            android:shadowColor="@color/light_navy"
-            android:shadowRadius="6"
-            android:shadowDy="7"
-            android:layout_marginTop="25dp"
-             />
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/manualremidiationoption2"
-            android:layout_width="319dp"
-            android:layout_height="57dp"
-            app:cornerRadius="9dp"
-            android:backgroundTint="#B30199E2"
-            android:text="Disconnect from the Network"
-            android:layout_gravity="center"
-            android:textStyle="bold"
-            android:textSize="20sp"
-            android:shadowColor="@color/light_navy"
-            android:shadowRadius="6"
-            android:shadowDy="7"
-            android:layout_marginTop="25dp"
-            />
-
-    </LinearLayout>
-    </LinearLayout>
-
-
-    <!-- Navigation Bar -->
-    <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/navigationBar"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:orientation="horizontal"
+        android:padding="10dp"
+        android:gravity="center"
         android:background="#E2E3EC"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent">
 
+        <!-- Home -->
         <LinearLayout
             android:id="@+id/nav_home"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:gravity="center"
+            android:layout_weight="1"
             android:orientation="vertical"
-            app:layout_constraintEnd_toStartOf="@id/nav_scan"
-            app:layout_constraintStart_toStartOf="parent"
-            tools:ignore="MissingConstraints">
+            android:gravity="center"
+            android:clickable="true"
+            android:focusable="true">
 
             <ImageView
-                android:layout_width="30dp"
-                android:layout_height="30dp"
+                android:layout_width="60dp"
+                android:layout_height="24dp"
                 android:src="@drawable/home" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Home"
-                android:textSize="20sp" />
+                android:textSize="15sp" />
         </LinearLayout>
 
+        <!-- Scan -->
         <LinearLayout
             android:id="@+id/nav_scan"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:gravity="center"
+            android:layout_weight="1"
             android:orientation="vertical"
-            app:layout_constraintEnd_toStartOf="@id/nav_settings"
-            app:layout_constraintStart_toEndOf="@id/nav_home"
-            tools:ignore="MissingConstraints">
+            android:gravity="center"
+            android:clickable="true"
+            android:focusable="true">
 
             <ImageView
-                android:layout_width="60dp"
-                android:layout_height="30dp"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
                 android:src="@drawable/scan"
-                android:background="@drawable/nav_selected"/>
+                 />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Scan"
-                android:textSize="20sp" />
+                android:textSize="15sp" />
         </LinearLayout>
 
+        <!-- Settings -->
         <LinearLayout
             android:id="@+id/nav_settings"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:gravity="center"
+            android:layout_weight="1"
             android:orientation="vertical"
-            app:layout_constraintEnd_toStartOf="@id/nav_help"
-            app:layout_constraintStart_toEndOf="@id/nav_scan"
-            tools:ignore="MissingConstraints">
+            android:gravity="center"
+            android:clickable="true"
+            android:focusable="true">
 
             <ImageView
-                android:layout_width="30dp"
-                android:layout_height="30dp"
+                android:layout_width="26dp"
+                android:layout_height="26dp"
                 android:src="@drawable/settings" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Settings"
-                android:textSize="20sp" />
+                android:textSize="15sp" />
         </LinearLayout>
 
+        <!-- Help -->
         <LinearLayout
             android:id="@+id/nav_help"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:gravity="center"
+            android:layout_weight="1"
             android:orientation="vertical"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@id/nav_settings"
-            tools:ignore="MissingConstraints">
+            android:gravity="center"
+            android:clickable="true"
+            android:focusable="true">
 
             <ImageView
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:src="@drawable/help" />
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:src="@drawable/help"
+                android:scaleType="centerCrop" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Help"
-                android:textSize="20sp" />
+                android:text="Helpbot"
+                android:textSize="15sp" />
         </LinearLayout>
+    </LinearLayout>
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
-
-
