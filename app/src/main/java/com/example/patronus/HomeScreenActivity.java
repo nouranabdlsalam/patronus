@@ -11,9 +11,11 @@ import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -45,28 +47,27 @@ public class HomeScreenActivity extends AppCompatActivity implements Wifi_precon
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_screen);
 
-        // UI references
         ssidText = findViewById(R.id.ssidText);
         bssidText = findViewById(R.id.bssidText);
         encryptionText = findViewById(R.id.encryptionText);
         securityText = findViewById(R.id.securityText);
         threatStatusText = findViewById(R.id.threatStatusText);
         threatStatusIcon = findViewById(R.id.threatStatusIcon);
-        network_btn = findViewById(R.id.networkCenter_btn);
-
-        // Network center button click
-        network_btn.setOnClickListener(v -> {
-            Intent i = new Intent(HomeScreenActivity.this, Network_center.class);
-            startActivity(i);
-        });
 
         wifiManager = (WifiManager) getApplicationContext().getSystemService(WIFI_SERVICE);
         wifiScanner = new Wifi_preconnec(this, this); // Fix: this class now implements WifiScanListener
 
-        // Register receiver once (optional – can be removed if not used in your Wifi_preconnec)
+        LinearLayout networkCenterBlock = findViewById(R.id.networkCenterBlock);
+        networkCenterBlock.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(HomeScreenActivity.this, Network_center.class);
+                startActivity(intent);
+            }
+        });
+
         // registerReceiver(wifiScanner.getReceiver(), new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION));
 
-        // Permission check
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
                 == PackageManager.PERMISSION_GRANTED) {
             performWifiScan();
@@ -116,10 +117,10 @@ public class HomeScreenActivity extends AppCompatActivity implements Wifi_precon
             int rssi = wifiInfo.getRssi();
             String capabilities = wifiScanner.getSecurityLevelFromCapabilities(ssid);
 
-            ssidText.setText("SSID: " + ssid);
-            bssidText.setText("BSSID: " + bssid);
-            encryptionText.setText("RSSI: " + rssi + " dBm");
-            securityText.setText("Encryption: " + capabilities);
+            ssidText.setText("" + ssid);
+            bssidText.setText("" + bssid);
+            encryptionText.setText("" + rssi + " dBm");
+            securityText.setText("" + capabilities);
 
             wifiScanner.startScan();
         } else {
@@ -136,9 +137,9 @@ public class HomeScreenActivity extends AppCompatActivity implements Wifi_precon
 
     public void onThreatDetected(String ssid, String bssid, String encryption, int score) {
         runOnUiThread(() -> {
-            ssidText.setText("SSID: " + ssid);
-            bssidText.setText("BSSID: " + bssid);
-            encryptionText.setText("Encryption: " + encryption);
+            ssidText.setText("" + ssid);
+            bssidText.setText("" + bssid);
+            encryptionText.setText("" + encryption);
 
             String threatLevel;
             String suggestion;
