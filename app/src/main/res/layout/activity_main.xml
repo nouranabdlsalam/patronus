@@ -7,9 +7,9 @@
     tools:context=".MainActivity">
 
     <Button
+        android:id="@+id/scan_test"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Scan"
-        android:id="@+id/scan_test"/>
+        android:text="Scan" />
 
 </LinearLayout>

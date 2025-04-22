@@ -1,194 +1,202 @@
 package com.example.patronus;
 
+import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.pm.PackageManager;
-import android.net.wifi.ScanResult;
+import android.net.ConnectivityManager;
+import android.net.VpnService;
 import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
+
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
+
 import java.util.List;
 
-public class HomeScreenActivity extends AppCompatActivity {
-    ImageButton scan, settings, help;
+public class HomeScreenActivity extends AppCompatActivity implements Wifi_preconnec.WifiScanListener {
 
-//    private static final int LOCATION_PERMISSION_REQUEST_CODE = 1001;
-//
-//    private TextView ssidText, securityText, bssidText, encryptionText, vpnStatus, monitoringStatus;
-//    private ImageView threatStatusIcon;
-//    private TextView threatStatusText;
-//    private Button vpnToggleButton, monitoringToggleButton;
-//
-//    private boolean isVpnActive = false;
-//    private boolean isMonitoringActive = false;
-//
-//    @Override
+    private Wifi_preconnec wifiScanner;
+    private WifiManager wifiManager;
+
+    private ListView wifiListView;
+    private ArrayAdapter<String> adapter;
+
+    private static final int LOCATION_PERMISSION_REQUEST_CODE = 1;
+
+    private TextView ssidText, bssidText, encryptionText, securityText, threatStatusText;
+    private ImageView threatStatusIcon;
+    private Button network_btn;
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_screen);
 
-        scan = findViewById(R.id.home_scan_button);
-        settings = findViewById(R.id.home_settings_button);
-        help = findViewById(R.id.home_help_button);
+        ssidText = findViewById(R.id.ssidText);
+        bssidText = findViewById(R.id.bssidText);
+        encryptionText = findViewById(R.id.encryptionText);
+        securityText = findViewById(R.id.securityText);
+        threatStatusText = findViewById(R.id.threatStatusText);
+        threatStatusIcon = findViewById(R.id.threatStatusIcon);
 
-        scan.setOnClickListener(new View.OnClickListener() {
+        wifiManager = (WifiManager) getApplicationContext().getSystemService(WIFI_SERVICE);
+        wifiScanner = new Wifi_preconnec(this, this); // Fix: this class now implements WifiScanListener
+
+        LinearLayout networkCenterBlock = findViewById(R.id.networkCenterBlock);
+        networkCenterBlock.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-               Intent intent = new Intent(HomeScreenActivity.this, ScanScreenActivity.class);
-               startActivity(intent);
-            }
-        });
-
-        settings.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(HomeScreenActivity.this, SettingsActivity.class);
+                Intent intent = new Intent(HomeScreenActivity.this, Network_center.class);
                 startActivity(intent);
             }
         });
 
-//        IPScanner collector = new IPScanner(getApplicationContext());
-//        collector.getAllConnections();
+        // registerReceiver(wifiScanner.getReceiver(), new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION));
 
-        Intent bgServiceIntent = new Intent(getApplicationContext(), BgReceiverService.class);
-        startService(bgServiceIntent);
-
-//        Intent networkServiceIntent = new Intent(getApplicationContext(), NetworkMonitorService.class);
-//        startService(networkServiceIntent);
-//        Log.d("HOME", "onCreate: Started");
-
-//
-//        // Initialize UI components
-//        ssidText = findViewById(R.id.ssidText);
-//        securityText = findViewById(R.id.securityText);
-//        bssidText = findViewById(R.id.bssidText);
-//        encryptionText = findViewById(R.id.encryptionText);
-//        vpnStatus = findViewById(R.id.vpnStatus);
-//        monitoringStatus = findViewById(R.id.monitoringStatus);
-//        threatStatusIcon = findViewById(R.id.threatStatusIcon);
-//        threatStatusText = findViewById(R.id.threatStatusText);
-//
-//
-//        checkNetworkDetails();
-//        setupListeners();
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
+                == PackageManager.PERMISSION_GRANTED) {
+            performWifiScan();
+        } else {
+            ActivityCompat.requestPermissions(
+                    this,
+                    new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
+                    LOCATION_PERMISSION_REQUEST_CODE
+            );
+        }
     }
-//
-//    private void checkNetworkDetails() {
-//        if (ContextCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION)
-//                != PackageManager.PERMISSION_GRANTED) {
-//            ActivityCompat.requestPermissions(this,
-//                    new String[]{android.Manifest.permission.ACCESS_FINE_LOCATION},
-//                    LOCATION_PERMISSION_REQUEST_CODE);
-//            return; // Exit method until permission is granted
-//        }
-//
-//        WifiManager wifiManager = (WifiManager) getApplicationContext().getSystemService(Context.WIFI_SERVICE);
-//
-//        if (wifiManager == null) {
-//            Toast.makeText(this, "Wi-Fi Manager unavailable", Toast.LENGTH_SHORT).show();
-//            return;
-//        }
-//
-//        if (!wifiManager.isWifiEnabled()) {
-//            Toast.makeText(this, "Wi-Fi is disabled. Please enable it.", Toast.LENGTH_LONG).show();
-//            return;
-//        }
-//
-//        WifiInfo wifiInfo = wifiManager.getConnectionInfo();
-//
-//        if (wifiInfo == null) {
-//            Toast.makeText(this, "Unable to retrieve Wi-Fi info", Toast.LENGTH_SHORT).show();
-//            return;
-//        }
-//
-//        String ssid = wifiInfo.getSSID().replace("\"", "");
-//        String bssid = wifiInfo.getBSSID();
-//        ssidText.setText(ssid);
-//        bssidText.setText(bssid);
-//
-//        String securityType = getSecurityType(wifiManager);
-//        securityText.setText(securityType);
-//
-//        boolean isThreat = isMaliciousSSID(ssid);
-//        threatStatusIcon.setImageResource(isThreat ? R.drawable.with_threats_warning : R.drawable.without_threats);
-//        threatStatusText.setText(isThreat ? "6 Threats Found" : "No Threats Found");
-//    }
-//
-//    private String getSecurityType(WifiManager wifiManager) {
-//        if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-//            return "Permission Required";
-//        }
-//        List<ScanResult> scanResults = wifiManager.getScanResults();
-//
-//        if (scanResults != null) {
-//            for (ScanResult result : scanResults) {
-//                if (result.SSID.equals(ssidText.getText().toString())) {
-//                    if (result.capabilities.contains("WPA3")) return "WPA3";
-//                    if (result.capabilities.contains("WPA2")) return "WPA2";
-//                    if (result.capabilities.contains("WPA")) return "WPA";
-//                    if (result.capabilities.contains("WEP")) return "WEP";
-//                    return "Open Network";
-//                }
-//            }
-//        }
-//        return "Unknown";
-//    }
-//
-//    private boolean isMaliciousSSID(String ssid) {
-//        String[] maliciousSSIDs = {"Malicious_Wifi", "Free_Hacked_Hotspot", "Fake_AP"};
-//
-//        for (String malicious : maliciousSSIDs) {
-//            if (ssid.equalsIgnoreCase(malicious)) {
-//                return true;
-//            }
-//        }
-//
-//        return false;
-//    }
-//
-//    private void setupListeners() {
-//        vpnToggleButton.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                isVpnActive = !isVpnActive;
-//                vpnStatus.setText(isVpnActive ? "VPN: Connected" : "VPN: Disconnected");
-//                vpnToggleButton.setBackgroundColor(ContextCompat.getColor(HomeScreenActivity.this,
-//                        isVpnActive ? R.color.green : R.color.red));
-//            }
-//        });
-//
-//        monitoringToggleButton.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                isMonitoringActive = !isMonitoringActive;
-//                monitoringStatus.setText(isMonitoringActive ? "Monitoring: Enabled" : "Monitoring: Disabled");
-//                monitoringToggleButton.setBackgroundColor(ContextCompat.getColor(HomeScreenActivity.this,
-//                        isMonitoringActive ? R.color.green : R.color.red));
-//            }
-//        });
-//    }
-//
-//    @Override
-//    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-//        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-//
-//        if (requestCode == LOCATION_PERMISSION_REQUEST_CODE) {
-//            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-//                checkNetworkDetails();
-//            } else {
-//                Toast.makeText(this, "Location permission is required for Wi-Fi scanning", Toast.LENGTH_LONG).show();
-//            }
-//        }
-//    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        // Only unregister if receiver is registered
+        try {
+            if (wifiScanner.getReceiver() != null)
+                unregisterReceiver(wifiScanner.getReceiver());
+        } catch (IllegalArgumentException ignored) {}
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions,
+                                           @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if (requestCode == LOCATION_PERMISSION_REQUEST_CODE) {
+            if (grantResults.length > 0 &&
+                    grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                performWifiScan();
+            } else {
+                Toast.makeText(this, "Location permission is required.", Toast.LENGTH_LONG).show();
+            }
+        }
+    }
+
+    public void performWifiScan() {
+        if (!wifiManager.isWifiEnabled()) {
+            Toast.makeText(this, "Please enable Wi-Fi to scan networks.", Toast.LENGTH_LONG).show();
+            return;
+        }
+
+        WifiInfo wifiInfo = wifiManager.getConnectionInfo();
+        if (wifiInfo != null && wifiInfo.getSSID() != null) {
+            String ssid = wifiInfo.getSSID().replace("\"", "");
+            String bssid = wifiInfo.getBSSID();
+            int rssi = wifiInfo.getRssi();
+            String capabilities = wifiScanner.getSecurityLevelFromCapabilities(ssid);
+
+            ssidText.setText("" + ssid);
+            bssidText.setText("" + bssid);
+            encryptionText.setText("" + rssi + " dBm");
+            securityText.setText("" + capabilities);
+
+            wifiScanner.startScan();
+        } else {
+            Toast.makeText(this, "No Wi-Fi info available", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    @Override
+    public void onWifiScanCompleted(List<String> wifiList) {
+        for (String wifi : wifiList) {
+            Log.d("ScanResult", wifi);
+        }
+    }
+
+    public void onThreatDetected(String ssid, String bssid, String encryption, int score) {
+        runOnUiThread(() -> {
+            ssidText.setText("" + ssid);
+            bssidText.setText("" + bssid);
+            encryptionText.setText("" + encryption);
+
+            String threatLevel;
+            String suggestion;
+
+            if (score >= 7) {
+                threatLevel = "⚠️ High Risk";
+                suggestion = "Use a trusted VPN, avoid entering sensitive data, and consider switching networks.";
+                threatStatusText.setText("Threat Detected!");
+                threatStatusIcon.setImageResource(R.drawable.with_threats_warning);
+            } else if (score >= 4) {
+                threatLevel = "⚠️ Moderate Risk";
+                suggestion = "Caution advised. Do not use apps requiring passwords or personal info.";
+                threatStatusText.setText("Potential Risk");
+                threatStatusIcon.setImageResource(R.drawable.with_threats_warning);
+            } else {
+                threatLevel = "✅ Low Risk";
+                suggestion = "Network appears safe.";
+                threatStatusText.setText("Safe Network");
+                threatStatusIcon.setImageResource(R.drawable.without_threats);
+            }
+
+            new androidx.appcompat.app.AlertDialog.Builder(HomeScreenActivity.this)
+                    .setTitle("Network Risk Analysis")
+                    .setMessage(
+                            "📶 SSID: " + ssid + "\n" +
+                                    "🔐 Encryption: " + encryption + "\n" +
+                                    "🛡️ Risk Score: " + score + " / 10\n" +
+                                    "⚠️ Threat Level: " + threatLevel + "\n\n" +
+                                    "💡 Suggestion: " + suggestion
+                    )
+                    .setPositiveButton("Remediate", (dialog, which) -> {
+                        Intent i = new Intent(HomeScreenActivity.this, Network_center.class);
+                        startActivity(i);
+                    })
+                    .setNegativeButton("Close", null)
+                    .show();
+        });
+    }
+
+
+    private void promptUserForVPN() {
+        Intent vpnIntent = VpnService.prepare(HomeScreenActivity.this);
+        if (vpnIntent != null) {
+            startActivityForResult(vpnIntent, 123);
+        } else {
+            startService(new Intent(this, SecureVpnService.class));
+        }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == 123 && resultCode == RESULT_OK) {
+            Log.i("VPN", "User accepted VPN permission");
+            startService(new Intent(this, SecureVpnService.class));
+        } else {
+            Log.w("VPN", "VPN permission denied");
+        }
+    }
 }

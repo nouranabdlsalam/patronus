@@ -8,10 +8,38 @@
     <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE_LOCATION" />
+<<<<<<< HEAD
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_BACKGROUND_LOCATION" />
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+    <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.BATTERY_STATS"
+        tools:ignore="ProtectedPermissions" />
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+    <uses-permission android:name="android.permission.GET_TASKS" />
+    <uses-permission
+        android:name="android.permission.QUERY_ALL_PACKAGES"
+        tools:ignore="QueryAllPackagesPermission" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE_DATA_SYNC" />
+    <queries>
+        <intent>
+            <action android:name="android.intent.action.PACKAGE_ADDED" />
+        </intent>
+    </queries>
+    <uses-permission android:name="android.permission.BATTERY_STATS"
+        tools:ignore="ProtectedPermissions" />
+    <uses-permission android:name="android.permission.QUERY_ALL_PACKAGES"
+        tools:ignore="QueryAllPackagesPermission" />
+
+=======
     <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE" />
     <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
     <uses-permission android:name="android.permission.QUERY_ALL_PACKAGES" />
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE_DATA_SYNC" />
+>>>>>>> dev
 
     <application
         android:allowBackup="true"
@@ -22,8 +50,20 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Patronus"
+        android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
+<<<<<<< HEAD
+            android:name=".Network_center"
+            android:exported="false" />
+        <activity
+            android:name=".HomeScreenActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Help"
+            android:exported="false" />
+
+=======
             android:name=".SecurityModesActivity"
             android:exported="false" />
         <activity
@@ -44,6 +84,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+>>>>>>> dev
         <activity
             android:name=".BlockedIPsActivity"
             android:exported="false" />
@@ -51,9 +92,12 @@
             android:name=".TrustedNetworksActivity"
             android:exported="false" />
         <activity
+<<<<<<< HEAD
+=======
             android:name=".MainActivity"
             android:exported="true" />
         <activity
+>>>>>>> dev
             android:name=".MaliciousAppsActivity"
             android:exported="false" />
         <activity
@@ -62,15 +106,32 @@
         <activity
             android:name=".ScanScreenActivity"
             android:exported="false" />
+        <activity
+            android:name=".SecurityModes"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+<<<<<<< HEAD
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".VpnControlActivity" />
 
         <service
+            android:name=".SecureVpnService"
+=======
+        <service
             android:name=".VPN"
+>>>>>>> dev
             android:exported="true"
             android:permission="android.permission.BIND_VPN_SERVICE">
             <intent-filter>
                 <action android:name="android.net.VpnService" />
             </intent-filter>
         </service>
+<<<<<<< HEAD
+=======
         <service
             android:name=".BgReceiverService"
             android:enabled="true"
@@ -79,6 +140,7 @@
             android:name=".NetworkMonitorService"
             android:enabled="true"
             android:foregroundServiceType="dataSync" />
+>>>>>>> dev
     </application>
 
 </manifest>
