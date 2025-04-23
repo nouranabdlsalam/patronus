@@ -180,36 +180,32 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <!-- Navigation Bar -->
-        <androidx.constraintlayout.widget.ConstraintLayout
+        <LinearLayout
             android:id="@+id/navigationBar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="#E2E3EC"
+            android:layout_alignParentBottom="true"
             android:orientation="horizontal"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent">
+            android:padding="10dp"
+            android:gravity="center"
+            app:layout_constraintBottom_toBottomOf="parent">
+
 
             <LinearLayout
                 android:id="@+id/nav_home"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:gravity="center"
+                android:layout_weight="1"
                 android:orientation="vertical"
                 android:clickable="true"
-                android:focusable="true"
-                android:layout_weight="1"
-                app:layout_constraintEnd_toStartOf="@id/nav_scan"
-                app:layout_constraintStart_toStartOf="parent"
-                tools:ignore="MissingConstraints">
+                android:focusable="true">
 
                 <ImageView
-                    android:id="@+id/settings_home"
                     android:layout_width="60dp"
                     android:layout_height="24dp"
-                    android:src="@drawable/home"
-                    />
+                    android:src="@drawable/home" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -227,16 +223,12 @@
                 android:layout_weight="1"
                 android:clickable="true"
                 android:focusable="true"
-                app:layout_constraintEnd_toStartOf="@id/nav_settings"
-                app:layout_constraintStart_toEndOf="@id/nav_home"
-                tools:ignore="MissingConstraints">
+                >
 
                 <ImageView
-                    android:id="@+id/settings_scan"
                     android:layout_width="24dp"
                     android:layout_height="24dp"
-                    android:src="@drawable/scan"
-                   />
+                    android:src="@drawable/scan" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -254,9 +246,7 @@
                 android:layout_weight="1"
                 android:clickable="true"
                 android:focusable="true"
-                app:layout_constraintEnd_toStartOf="@id/nav_help"
-                app:layout_constraintStart_toEndOf="@id/nav_scan"
-                tools:ignore="MissingConstraints">
+                >
 
                 <ImageView
                     android:layout_width="60dp"
@@ -280,17 +270,13 @@
                 android:layout_weight="1"
                 android:clickable="true"
                 android:focusable="true"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@id/nav_settings"
-                tools:ignore="MissingConstraints">
+                >
 
                 <ImageView
-                    android:id="@+id/settings_help"
                     android:layout_width="40dp"
                     android:layout_height="40dp"
                     android:src="@drawable/help"
-
-                    />
+                    android:scaleType="centerCrop"/>
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -299,6 +285,8 @@
                     android:textSize="15sp" />
             </LinearLayout>
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
+        </LinearLayout>
+
     </androidx.constraintlayout.widget.ConstraintLayout>
+
 </LinearLayout>
