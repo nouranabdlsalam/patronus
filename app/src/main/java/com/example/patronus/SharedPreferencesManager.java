@@ -24,6 +24,8 @@ public class SharedPreferencesManager {
         return prefs.getBoolean("balancedMode", true);
     }
 
+    public boolean isIPDBPopulated(){return prefs.getBoolean("ipdbPopulated", false);}
+
 
     public void setMalwareMonitoringOn(boolean isEnabled){
         SharedPreferences.Editor editor = prefs.edit();
@@ -40,6 +42,12 @@ public class SharedPreferencesManager {
     public void setBalancedModeOn(boolean isEnabled){
         SharedPreferences.Editor editor = prefs.edit();
         editor.putBoolean("balancedMode", isEnabled);
+        editor.apply();
+    }
+
+    public void setIPDBPopulated(boolean isPopulated){
+        SharedPreferences.Editor editor = prefs.edit();
+        editor.putBoolean("ipdbPopulated", isPopulated);
         editor.apply();
     }
 

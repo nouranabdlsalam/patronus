@@ -154,6 +154,7 @@ public class SystemMonitoringService extends Service {
         super.onDestroy();
         turnMalwareMonitoringOff();
         turnNetworkMonitoringOff();
+        turnAutoModeOff();
     }
 
 
