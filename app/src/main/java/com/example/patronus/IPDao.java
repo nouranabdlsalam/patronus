@@ -21,4 +21,11 @@ public interface IPDao {
 
     @Query("DELETE FROM malicious_ips WHERE ip = :ipToDelete")
     void deleteIP(String ipToDelete);
+
+    // Bulk insertion method
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
+    void insertIPs(List<MaliciousIP> ipList);
+
+    @Query("SELECT COUNT(*) FROM malicious_ips")
+    int getTotalIPsCount();
 }

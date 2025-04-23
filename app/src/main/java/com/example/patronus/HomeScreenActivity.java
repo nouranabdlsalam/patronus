@@ -29,8 +29,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.app.NotificationCompat;
 import androidx.core.content.ContextCompat;
+import androidx.room.Room;
 
 import java.util.List;
+import java.util.concurrent.Executors;
 
 public class HomeScreenActivity extends AppCompatActivity implements Wifi_preconnec.WifiScanListener {
 
@@ -50,6 +52,16 @@ public class HomeScreenActivity extends AppCompatActivity implements Wifi_precon
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_screen);
+
+
+        // Initialize the Room database and the DAO
+        IPDatabase db = Room.databaseBuilder(getApplicationContext(),
+                IPDatabase.class, "ip_database").build();
+        IPDao ipDao = db.ipDao();
+        IPDBLoader.loadIPsIfNeeded(getApplicationContext(), ipDao);
+        SharedPreferencesManager sp = new SharedPreferencesManager(getApplicationContext());
+        Log.d("TAG", "onCreate: " + sp.isIPDBPopulated());
+
 
         Intent sysmonIntent = new Intent(this, SystemMonitoringService.class);
         startService(sysmonIntent);
@@ -242,9 +254,6 @@ public class HomeScreenActivity extends AppCompatActivity implements Wifi_precon
             }
         ThreatLevel.setText(threatLevel);
         showThreatNotification(suggestion);
-
-
-
 
     }
 

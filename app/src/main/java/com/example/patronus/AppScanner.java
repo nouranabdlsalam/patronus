@@ -236,7 +236,7 @@ public class AppScanner {
 
     public int getContextAwareScore(double modelConfidence, int category, int sideloadingScore){
         double categoryRisk = getCategoryRisk(category);
-        double contextAwareScore = 0.6 * modelConfidence + 0.2 * categoryRisk + 0.2 * sideloadingScore;
+        double contextAwareScore = 0.6 * modelConfidence + 0.3 * categoryRisk + 0.1 * sideloadingScore;
         Log.d("CONTEXT", "model confidence: " + modelConfidence + ", category: " + category + ", sideloading score: " + sideloadingScore + ", context score: " + contextAwareScore);
         return contextAwareScore > 0.7 ? 1 : 0;
     }
