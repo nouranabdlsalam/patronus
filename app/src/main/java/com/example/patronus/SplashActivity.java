@@ -10,7 +10,6 @@ import android.os.Looper;
 public class SplashActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        setTheme(R.style.Theme_Patronus);
         setContentView(R.layout.activity_splash);
         super.onCreate(savedInstanceState);
 
