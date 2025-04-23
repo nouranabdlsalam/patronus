@@ -1,5 +1,6 @@
 package com.example.patronus;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -34,6 +35,13 @@ public class MaliciousAppsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_trusted_networks);
 
         back = findViewById(R.id.trusted_networks_back);
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+
 
         title = findViewById(R.id.trusted_networks_title);
         title.setText("Malicious Apps");
@@ -52,7 +60,42 @@ public class MaliciousAppsActivity extends AppCompatActivity {
         recyclerView = findViewById(R.id.trusted_networks_recycler_view);
 
         navbar = findViewById(R.id.navigationBar);
-        navbar.setVisibility(View.GONE);
+
+        LinearLayout nav_home= findViewById(R.id.nav_home);
+        nav_home.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MaliciousAppsActivity.this, HomeScreenActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        LinearLayout nav_settings= findViewById(R.id.nav_settings);
+        nav_settings.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MaliciousAppsActivity.this, SettingsActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        LinearLayout nav_help= findViewById(R.id.nav_help);
+        nav_help.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MaliciousAppsActivity.this, Help.class);
+                startActivity(intent);
+            }
+        });
+
+        LinearLayout nav_scan= findViewById(R.id.nav_scan);
+        nav_scan.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MaliciousAppsActivity.this, ScanScreenActivity.class);
+                startActivity(intent);
+            }
+        });
 
         List<App> allApps = new ArrayList<>();
         boolean malware = false;

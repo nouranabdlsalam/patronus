@@ -1,6 +1,8 @@
 package com.example.patronus;
 
 import android.Manifest;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
@@ -9,6 +11,7 @@ import android.net.ConnectivityManager;
 import android.net.VpnService;
 import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -24,6 +27,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
+import androidx.core.app.NotificationCompat;
 import androidx.core.content.ContextCompat;
 
 import java.util.List;
@@ -38,9 +42,9 @@ public class HomeScreenActivity extends AppCompatActivity implements Wifi_precon
 
     private static final int LOCATION_PERMISSION_REQUEST_CODE = 1;
 
-    private TextView ssidText, bssidText, encryptionText, securityText, threatStatusText;
+    private TextView ssidText, bssidText, encryptionText, ThreatLevel, threatStatusText, monitoringStatus;
     private ImageView threatStatusIcon;
-    private Button network_btn;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,9 +57,10 @@ public class HomeScreenActivity extends AppCompatActivity implements Wifi_precon
         ssidText = findViewById(R.id.ssidText);
         bssidText = findViewById(R.id.bssidText);
         encryptionText = findViewById(R.id.encryptionText);
-        securityText = findViewById(R.id.securityText);
         threatStatusText = findViewById(R.id.threatStatusText);
         threatStatusIcon = findViewById(R.id.threatStatusIcon);
+        monitoringStatus = findViewById(R.id.monitoringStatus);
+        ThreatLevel = findViewById(R.id.ThreatLevel);
 
         wifiManager = (WifiManager) getApplicationContext().getSystemService(WIFI_SERVICE);
         wifiScanner = new Wifi_preconnec(this, this); // Fix: this class now implements WifiScanListener
@@ -68,7 +73,14 @@ public class HomeScreenActivity extends AppCompatActivity implements Wifi_precon
                 startActivity(intent);
             }
         });
-
+        LinearLayout home_security_modes = findViewById(R.id.home_security_modes);
+        home_security_modes.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(HomeScreenActivity.this, SettingsActivity.class);
+                startActivity(intent);
+            }
+        });
         LinearLayout nav_scan= findViewById(R.id.nav_scan);
         nav_scan.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -95,8 +107,18 @@ public class HomeScreenActivity extends AppCompatActivity implements Wifi_precon
                 startActivity(intent);
             }
         });
-
-
+        SharedPreferencesManager sharedPreferencesManager = new SharedPreferencesManager(this);
+         if (sharedPreferencesManager.isBalancedModeOn()){
+             monitoringStatus.setText("Balanced Security");
+         }
+         else {
+             if (sharedPreferencesManager.isMalwareMonitoringOn()){
+                 monitoringStatus.setText("On");
+             }
+             else {
+                 monitoringStatus.setText("Off");
+             }
+         }
 
 
         // registerReceiver(wifiScanner.getReceiver(), new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION));
@@ -111,6 +133,8 @@ public class HomeScreenActivity extends AppCompatActivity implements Wifi_precon
                     LOCATION_PERMISSION_REQUEST_CODE
             );
         }
+
+
     }
 
     @Override
@@ -153,7 +177,7 @@ public class HomeScreenActivity extends AppCompatActivity implements Wifi_precon
             ssidText.setText("" + ssid);
             bssidText.setText("" + bssid);
             encryptionText.setText("" + rssi + " dBm");
-            securityText.setText("" + capabilities);
+            ThreatLevel.setText("" + capabilities);
 
             wifiScanner.startScan();
         } else {
@@ -167,9 +191,31 @@ public class HomeScreenActivity extends AppCompatActivity implements Wifi_precon
             Log.d("ScanResult", wifi);
         }
     }
+    private void showThreatNotification(String suggestion) {
+        String channelId = "wifi_threat_channel";
+        String channelName = "Wi-Fi Threat Notifications";
+
+        NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            NotificationChannel channel = new NotificationChannel(channelId, channelName, NotificationManager.IMPORTANCE_HIGH);
+            channel.setDescription("Notifies when unsafe Wi-Fi is detected.");
+            notificationManager.createNotificationChannel(channel);
+        }
+
+        NotificationCompat.Builder builder = new NotificationCompat.Builder(this, channelId)
+                .setSmallIcon(R.drawable.warning)
+                .setContentTitle("Wi-Fi Threat Detected")
+                .setContentText(suggestion)
+                .setPriority(NotificationCompat.PRIORITY_HIGH)
+                .setAutoCancel(true);
+
+        notificationManager.notify(1, builder.build());
+    }
+
 
     public void onThreatDetected(String ssid, String bssid, String encryption, int score) {
-        runOnUiThread(() -> {
+
             ssidText.setText("" + ssid);
             bssidText.setText("" + bssid);
             encryptionText.setText("" + encryption);
@@ -177,59 +223,30 @@ public class HomeScreenActivity extends AppCompatActivity implements Wifi_precon
             String threatLevel;
             String suggestion;
 
+
             if (score >= 7) {
                 threatLevel = "⚠️ High Risk";
-                suggestion = "Use a trusted VPN, avoid entering sensitive data, and consider switching networks.";
-                threatStatusText.setText("Threat Detected!");
                 threatStatusIcon.setImageResource(R.drawable.with_threats_warning);
+                threatStatusText.setText("Wi-Fi threat detected!");
+                suggestion = "Use a trusted VPN, avoid entering sensitive data, and consider switching networks.";
             } else if (score >= 4) {
                 threatLevel = "⚠️ Moderate Risk";
-                suggestion = "Caution advised. Do not use apps requiring passwords or personal info.";
-                threatStatusText.setText("Potential Risk");
+                threatStatusText.setText("Wi-Fi threat detected!");
                 threatStatusIcon.setImageResource(R.drawable.with_threats_warning);
+                suggestion = "Caution advised. Do not use apps requiring passwords or personal info.";
             } else {
                 threatLevel = "✅ Low Risk";
-                suggestion = "Network appears safe.";
-                threatStatusText.setText("Safe Network");
+                threatStatusText.setText("No Wi-Fi threats detected.");
                 threatStatusIcon.setImageResource(R.drawable.without_threats);
+                suggestion = "Network appears safe.";
             }
+        ThreatLevel.setText(threatLevel);
+        showThreatNotification(suggestion);
 
-            new androidx.appcompat.app.AlertDialog.Builder(HomeScreenActivity.this)
-                    .setTitle("Network Risk Analysis")
-                    .setMessage(
-                            "📶 SSID: " + ssid + "\n" +
-                                    "🔐 Encryption: " + encryption + "\n" +
-                                    "🛡️ Risk Score: " + score + " / 10\n" +
-                                    "⚠️ Threat Level: " + threatLevel + "\n\n" +
-                                    "💡 Suggestion: " + suggestion
-                    )
-                    .setPositiveButton("Remediate", (dialog, which) -> {
-                        Intent i = new Intent(HomeScreenActivity.this, Network_center.class);
-                        startActivity(i);
-                    })
-                    .setNegativeButton("Close", null)
-                    .show();
-        });
+
+
+
     }
 
 
-    private void promptUserForVPN() {
-        Intent vpnIntent = VpnService.prepare(HomeScreenActivity.this);
-        if (vpnIntent != null) {
-            startActivityForResult(vpnIntent, 123);
-        } else {
-            startService(new Intent(this, SecureVpnService.class));
-        }
-    }
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == 123 && resultCode == RESULT_OK) {
-            Log.i("VPN", "User accepted VPN permission");
-            startService(new Intent(this, SecureVpnService.class));
-        } else {
-            Log.w("VPN", "VPN permission denied");
-        }
-    }
 }

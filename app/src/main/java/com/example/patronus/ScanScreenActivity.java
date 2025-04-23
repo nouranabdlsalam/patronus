@@ -66,6 +66,8 @@ public class ScanScreenActivity extends AppCompatActivity {
             }
         });
 
+
+
         selectedApps = new ArrayList<App>();
 
         allApps.setOnClickListener(new View.OnClickListener() {

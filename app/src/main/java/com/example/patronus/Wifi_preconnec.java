@@ -128,7 +128,7 @@ public class Wifi_preconnec {
     }
 
 
-    private int calculateRiskScore(ScanResult scanResult, List<ScanResult> allResults) {
+    public int calculateRiskScore(ScanResult scanResult, List<ScanResult> allResults) {
         int score = 0;
 
         String capabilities = scanResult.capabilities;

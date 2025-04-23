@@ -13,7 +13,7 @@ public class SharedPreferencesManager {
 
 
     public boolean isMalwareMonitoringOn(){
-        return prefs.getBoolean("malwareMonitoring", true);
+        return prefs.getBoolean("malwareMonitoring", false);
     }
 
     public boolean isNetworkMonitoringOn(){

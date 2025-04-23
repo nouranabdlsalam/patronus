@@ -5,6 +5,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.activity.EdgeToEdge;
@@ -39,6 +40,41 @@ public class ThreatRemediation extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 finish();
+            }
+        });
+
+        LinearLayout nav_home= findViewById(R.id.nav_home);
+        nav_home.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(ThreatRemediation.this, HomeScreenActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        LinearLayout nav_settings= findViewById(R.id.nav_settings);
+        nav_settings.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(ThreatRemediation.this, SettingsActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        LinearLayout nav_help= findViewById(R.id.nav_help);
+        nav_help.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(ThreatRemediation.this, Help.class);
+                startActivity(intent);
+            }
+        });
+        LinearLayout nav_scan= findViewById(R.id.nav_scan);
+        nav_scan.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(ThreatRemediation.this,ScanScreenActivity.class);
+                startActivity(intent);
             }
         });
 

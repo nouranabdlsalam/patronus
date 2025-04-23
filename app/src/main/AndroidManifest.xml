@@ -48,6 +48,7 @@
         <activity
             android:name=".Network_center"
             android:exported="false" />
+
         <activity
             android:name=".SecurityModes"
             android:exported="false" />
@@ -72,6 +73,9 @@
             android:exported="false" />
         <activity
             android:name=".SettingsActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ThreatRemediation"
             android:exported="false" />
         <activity
             android:name=".HomeScreenActivity"

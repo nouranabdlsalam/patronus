@@ -31,7 +31,7 @@
             android:id="@+id/scan_screen_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/scan"
+            android:text="App Protection Center"
             android:textSize="30sp"
             android:layout_marginTop="20dp"
             android:layout_marginBottom="45dp"

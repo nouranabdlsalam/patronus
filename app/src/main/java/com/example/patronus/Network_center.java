@@ -15,6 +15,7 @@
     import android.util.Log;
     import android.view.View;
     import android.widget.ImageButton;
+    import android.widget.LinearLayout;
     import android.widget.RadioButton;
     import android.widget.TextView;
     import android.widget.Toast;
@@ -47,6 +48,41 @@
                 @Override
                 public void onClick(View v) {
                     finish();
+                }
+            });
+
+            LinearLayout nav_home= findViewById(R.id.nav_home);
+            nav_home.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(Network_center.this, HomeScreenActivity.class);
+                    startActivity(intent);
+                }
+            });
+
+            LinearLayout nav_settings= findViewById(R.id.nav_settings);
+            nav_settings.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(Network_center.this, SettingsActivity.class);
+                    startActivity(intent);
+                }
+            });
+
+            LinearLayout nav_scan= findViewById(R.id.nav_scan);
+            nav_scan.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(Network_center.this, ScanScreenActivity.class);
+                    startActivity(intent);
+                }
+            });
+            LinearLayout nav_help= findViewById(R.id.nav_help);
+            nav_help.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(Network_center.this, Help.class);
+                    startActivity(intent);
                 }
             });
 
@@ -220,6 +256,9 @@
                         if (isRogue) {
                             Toast.makeText(Network_center.this, "Rogue AP Detected!", Toast.LENGTH_SHORT).show();
                         }
+                        Intent intent = new Intent(Network_center.this, ThreatRemediation.class);
+                        startActivity(intent);
+
                     })
                     .setNegativeButton("Close", null)
                     .show();
