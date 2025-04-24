@@ -30,9 +30,9 @@ public class NetworkMonitorService extends Service {
 
         new Thread(() -> {
             IPScanner scanner = new IPScanner(this);
-            long endTime = System.currentTimeMillis() + 30_000;
+//            long endTime = System.currentTimeMillis() + 30_000;
 
-            while (System.currentTimeMillis() < endTime) {
+//            while (System.currentTimeMillis() < endTime) {
                 if (!sharedPreferencesManager.isNetworkMonitoringOn()){
                     Log.d("NETWORK MONITOR", "Network Monitoring is OFF. Stopping Service.");
                     stopSelf();
@@ -40,12 +40,12 @@ public class NetworkMonitorService extends Service {
                 }
                 appConnections = scanner.getAllConnections(); // or your enhanced one
 
-                try {
-                    Thread.sleep(3000); // collect every 3 seconds (tweak if needed)
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-            }
+//                try {
+//                    Thread.sleep(3000); // collect every 3 seconds (tweak if needed)
+//                } catch (InterruptedException e) {
+//                    e.printStackTrace();
+//                }
+//            }
 
             ArrayList<App> maliciousApps = scanner.scanConnections(appConnections);
             if (maliciousApps.size() > 0){
