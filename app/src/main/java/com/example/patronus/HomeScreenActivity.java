@@ -236,12 +236,12 @@ public class HomeScreenActivity extends AppCompatActivity implements Wifi_precon
             String suggestion;
 
 
-            if (score >= 7) {
+            if (score >= 5) {
                 threatLevel = "⚠️ High Risk";
                 threatStatusIcon.setImageResource(R.drawable.with_threats_warning);
                 threatStatusText.setText("Wi-Fi threat detected!");
                 suggestion = "Use a trusted VPN, avoid entering sensitive data, and consider switching networks.";
-            } else if (score >= 4) {
+            } else if (score >= 3) {
                 threatLevel = "⚠️ Moderate Risk";
                 threatStatusText.setText("Wi-Fi threat detected!");
                 threatStatusIcon.setImageResource(R.drawable.with_threats_warning);

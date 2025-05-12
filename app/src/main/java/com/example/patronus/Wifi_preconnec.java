@@ -22,7 +22,7 @@ public class Wifi_preconnec {
     private WifiScanListener listener;
     private BroadcastReceiver wifiScanReceiver;
     private boolean isReceiverRegistered = false;
-    private final Set<String> notifiedSsids = new HashSet<>(); // for rate-limiting
+    private final Set<String> notifiedSsids = new HashSet<>();
     private static final String TAG = "Wifi_preconnec";
 
     public Wifi_preconnec(Context context, WifiScanListener listener) {
@@ -32,19 +32,16 @@ public class Wifi_preconnec {
     }
 
     public void startScan() {
-        // Check if Wi-Fi is enabled first
         if (!wifiManager.isWifiEnabled()) {
             Toast.makeText(context, "Please enable Wi-Fi to scan networks", Toast.LENGTH_SHORT).show();
             return;
         }
 
-        // Check for permissions
         if (ActivityCompat.checkSelfPermission(context, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             Toast.makeText(context, "Location permission not granted", Toast.LENGTH_SHORT).show();
             return;
         }
 
-        // Set up BroadcastReceiver only if not already registered
         if (!isReceiverRegistered) {
             wifiScanReceiver = new BroadcastReceiver() {
                 @Override
@@ -141,27 +138,28 @@ public class Wifi_preconnec {
         boolean isWPA2 = capabilities.contains("WPA2");
         boolean isWPA3 = capabilities.contains("WPA3");
 
-        if (isOpen) score += 4;
+        if (isOpen) score += 2;
         else if (isWEP) score += 3;
-        else if (isWPA) score += 2;
-        else if (isWPA2) score += 1;
-        else if (isWPA3) score += 0; // Best encryption
+        else if (isWPA) score += 1;
+        else if (isWPA2) score += 0;
+        else if (isWPA3) score += 0;
 
-        // Signal-based suspicion (rogue AP?)
-        if (rssi > -40 && isOpen) score += 3;
 
-        // Check for duplicate SSID with different BSSID and lower encryption
+        if (rssi > -40 && isOpen) score += 1;
+
+
         for (ScanResult other : allResults) {
             if (!other.BSSID.equals(scanResult.BSSID) && other.SSID.equals(ssid)) {
                 String otherSecurity = getSecurityType(other.capabilities);
                 if (!otherSecurity.equals(getSecurityType(capabilities))) {
-                    score += 2;
+                    score += 1;
                 }
             }
         }
 
-        return Math.min(score, 10); // Cap max score
+        return Math.min(score, 6);
     }
+
 
     private String getSecurityType(String capabilities) {
         if (capabilities.contains("WPA3")) return "WPA3";
