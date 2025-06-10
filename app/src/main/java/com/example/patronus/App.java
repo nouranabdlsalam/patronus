@@ -17,6 +17,7 @@ public class App implements Parcelable {
     ArrayList<String> IPs;
 
     ArrayList<String> maliciousIPs;
+    boolean browser;
 
     long txBytes, rxBytes;
     public App(String packageName, String name){
@@ -107,6 +108,7 @@ public class App implements Parcelable {
         icon = in.readInt();
         IPs = in.createStringArrayList();
         maliciousIPs = in.createStringArrayList();
+        browser = in.readByte() != 0;
     }
 
     @Override
@@ -117,6 +119,7 @@ public class App implements Parcelable {
         dest.writeInt(icon);
         dest.writeStringList(IPs);
         dest.writeStringList(maliciousIPs);
+        dest.writeByte((byte) (browser ? 1 : 0));
     }
 
     @Override

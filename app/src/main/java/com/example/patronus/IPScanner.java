@@ -26,11 +26,23 @@ public class IPScanner {
         PackageManager pm = context.getPackageManager();
         List<ApplicationInfo> apps = pm.getInstalledApplications(0);
 
+        ArrayList<String> browsers = new ArrayList<>();
+        browsers.add("com.android.chrome");
+        browsers.add("com.google.android.googlequicksearchbox");
+        browsers.add("org.mozilla.firefox");
+        browsers.add("com.opera.browser.afin");
+        browsers.add("com.brave.browser");
+
         for (ApplicationInfo app : apps) {
 //            if ((app.flags & ApplicationInfo.FLAG_SYSTEM) != 0) continue;
 //            if (app.uid < 10000) continue;  // skip system-level UIDs
 
             App current = new App(pm.getNameForUid(app.uid), app.loadLabel(pm).toString());
+
+            if (browsers.contains(app.packageName)){
+                current.browser = true;
+            }
+
             current.setUid(app.uid);
             userApps.add(current);
         }
@@ -172,8 +184,13 @@ public class IPScanner {
 //        MaliciousIP maliciousIP = new MaliciousIP("104.199.65.9");
 //        ipDao.insertIP(maliciousIP);
 
+//        MaliciousIP maliciousIP = new MaliciousIP("192.168.1.36");
+//        ipDao.insertIP(maliciousIP);
+
 //        MaliciousIP maliciousIP = new MaliciousIP("142.251.37.202");
 //        ipDao.insertIP(maliciousIP); ------> fix. (SelectAppsScreen?)
+
+        Log.d("Malicious Check", "192.168.1.36 malicious? " + ipDao.isMalicious("192.168.1.36"));
 
         for (App app : userApps) {
             if (!app.getIPs().isEmpty()){
@@ -185,6 +202,7 @@ public class IPScanner {
                             maliciousApps.add(app);
                         }
                         Log.d("NETWORK MONITOR ALERT", app.getName() + " communicates with a suspicious IP " + ip);
+                        Log.d("Browser Check", app.getName() + " is a browser? " + app.browser);
                     }
                 }
             }

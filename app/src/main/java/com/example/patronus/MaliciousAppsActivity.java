@@ -110,6 +110,9 @@ public class MaliciousAppsActivity extends AppCompatActivity {
         }
         else {
             allApps = getIntent().getParcelableArrayListExtra("MaliciousIP");
+            for (App app: allApps){
+                Log.d("Malicious IP Activity", app.getName() + " is a browser? " + app.browser);
+            }
         }
 
         if (allApps.isEmpty()){

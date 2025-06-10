@@ -3,6 +3,7 @@ package com.example.patronus;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
@@ -102,17 +103,26 @@ public class ThreatRemediation extends AppCompatActivity {
 
             attackTitle.setText("Network Threat Found");
 
-            if (MaliciousApp.getMaliciousIPs().size() > 1){
-                String IPs = "";
-                for (String ip: MaliciousApp.getMaliciousIPs()) {
-                    IPs += (ip + ", ");
-                }
-                attackDescription.setText( MaliciousApp.getName() + " communicates with suspicious IPs: " + IPs + " and might be malicious. " +
-                        "If you don't trust this app, we recommend deleting it.");
+            Log.d("Browser Check", MaliciousApp.getName() + " is a browser? " + MaliciousApp.browser);
+
+            if (MaliciousApp.browser){
+                attackDescription.setText("You have visited a potentially malicious site while using " + MaliciousApp.getName() + ". It is communicating with a suspicious IP address: " + MaliciousApp.getMaliciousIPs().get(0) + " and we recommend avoiding it.");
+                option1.setVisibility(View.GONE);
+                TextView remediationOpt = findViewById(R.id.remed_opts);
+                remediationOpt.setVisibility(View.GONE);
             }
-            else{
-                attackDescription.setText( MaliciousApp.getName() + " communicates with a suspicious IP: " + MaliciousApp.getMaliciousIPs().get(0) + " and might be malicious. " +
-                        "If you don't trust this app, we recommend deleting it.");
+            else {
+                if (MaliciousApp.getMaliciousIPs().size() > 1) {
+                    String IPs = "";
+                    for (String ip : MaliciousApp.getMaliciousIPs()) {
+                        IPs += (ip + ", ");
+                    }
+                    attackDescription.setText(MaliciousApp.getName() + " communicates with suspicious IPs: " + IPs + " and might be malicious. " +
+                            "If you don't trust this app, we recommend deleting it.");
+                } else {
+                    attackDescription.setText(MaliciousApp.getName() + " communicates with a suspicious IP: " + MaliciousApp.getMaliciousIPs().get(0) + " and might be malicious. " +
+                            "If you don't trust this app, we recommend deleting it.");
+                }
             }
         }
 

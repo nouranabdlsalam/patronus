@@ -75,7 +75,7 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="16dp"
                 app:cardCornerRadius="12dp"
-                app:cardBackgroundColor="#3E4751"
+                app:cardBackgroundColor="@color/light_navy"
                 app:cardElevation="4dp">
 
                 <LinearLayout
@@ -107,6 +107,7 @@
 
             <!-- Remediation Options -->
             <TextView
+                android:id="@+id/remed_opts"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Remediation Options:"

@@ -96,6 +96,7 @@ public class ScanScreenActivity extends AppCompatActivity {
 
                 AppScanner scanner = new AppScanner(getApplicationContext());
                 malware = new ArrayList<App>();
+                long start = System.currentTimeMillis();
                 for (App app: selectedApps) {
                     try {
                         if (scanner.scanApp(app) == 1){
@@ -106,7 +107,7 @@ public class ScanScreenActivity extends AppCompatActivity {
                         throw new RuntimeException(e);
                     }
                 }
-
+                Log.d("SCAN TIME", (System.currentTimeMillis() - start) + " ms");
                 triggerThreatRemediation(malware);
             }
         });

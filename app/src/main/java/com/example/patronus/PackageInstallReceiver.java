@@ -77,7 +77,7 @@ public class PackageInstallReceiver extends BroadcastReceiver {
         NotificationCompat.Builder builder = new NotificationCompat.Builder(context, "WiFiMonitorChannel")
                 .setSmallIcon(R.drawable.warning) // Replace with your actual icon
                 .setContentTitle("⚠️ Malicious App Detected")
-                .setContentText(msg + " might be malicious. tap to view details.")
+                .setContentText(msg + maliciousApps.get(0).packageName + " might be malicious. tap to view details.")
                 .setPriority(NotificationCompat.PRIORITY_HIGH)
                 .setCategory(NotificationCompat.CATEGORY_ALARM)
                 .setAutoCancel(true)

@@ -74,6 +74,7 @@ public class NetworkMonitorService extends Service {
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         for (App app: maliciousApps) {
             app.setIcon(2);
+            Log.d("Notification check", app.getName() + "is a browser? " + app.browser);
         }
         intent.putParcelableArrayListExtra("MaliciousIP", maliciousApps);
 
