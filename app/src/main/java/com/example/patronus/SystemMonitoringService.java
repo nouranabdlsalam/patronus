@@ -42,7 +42,7 @@ public class SystemMonitoringService extends Service {
                 startService(intent); // it will stop itself after 30 sec
 
                 // Schedule next run
-                handler.postDelayed(this, 1 * 60 * 1000); // 15 minutes
+                handler.postDelayed(this, 1 * 60 * 1000); // 5 minutes
             }
         };
 

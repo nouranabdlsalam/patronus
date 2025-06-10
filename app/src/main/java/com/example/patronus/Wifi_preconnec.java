@@ -125,6 +125,7 @@ public class Wifi_preconnec {
     }
 
 
+
     public int calculateRiskScore(ScanResult scanResult, List<ScanResult> allResults) {
         int score = 0;
 
@@ -132,32 +133,35 @@ public class Wifi_preconnec {
         int rssi = scanResult.level;
         String ssid = scanResult.SSID;
 
-        boolean isOpen = capabilities.contains("[ESS]") || capabilities.equals("[ESS]");
-        boolean isWEP = capabilities.contains("WEP");
-        boolean isWPA = capabilities.contains("WPA");
-        boolean isWPA2 = capabilities.contains("WPA2");
-        boolean isWPA3 = capabilities.contains("WPA3");
+        // Encryption / Authentication
+        if (capabilities.contains("WEP")) {
+            score += 4; // High risk
+        } else if (capabilities.contains("WPA") && !capabilities.contains("WPA2")) {
+            score += 3; // Moderate risk
+        } else if (capabilities.contains("WPA2") && !capabilities.contains("WPA3")) {
+            score += 2; // Lower risk
+        } else if (capabilities.contains("WPA3")) {
+            score += 1; // Low risk
+        } else if (capabilities.contains("ESS")) {
+            score += 5; // Open network, very high risk
+        }
 
-        if (isOpen) score += 2;
-        else if (isWEP) score += 3;
-        else if (isWPA) score += 1;
-        else if (isWPA2) score += 0;
-        else if (isWPA3) score += 0;
+        // Signal Strength (Evil Twin / Rogue AP detection suspicion)
+        if (rssi > -40 && capabilities.contains("ESS")) {
+            score += 2; // suspiciously strong open AP
+        }
 
-
-        if (rssi > -40 && isOpen) score += 1;
-
-
+        // Check for SSID confusion - same SSID but different security
         for (ScanResult other : allResults) {
             if (!other.BSSID.equals(scanResult.BSSID) && other.SSID.equals(ssid)) {
-                String otherSecurity = getSecurityType(other.capabilities);
-                if (!otherSecurity.equals(getSecurityType(capabilities))) {
-                    score += 1;
+                if (!getSecurityType(other.capabilities).equals(getSecurityType(capabilities))) {
+                    score += 2; // suspicious SSID confusion
                 }
             }
         }
 
-        return Math.min(score, 6);
+        // Final clamp for more meaningful range
+        return Math.min(score, 10);
     }
 
 
