@@ -1,0 +1,222 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#282F41"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:weightSum="3"
+        android:background="@drawable/bubble_bg">
+
+        <ImageButton
+            android:id="@+id/netcenterback"
+            android:layout_width="wrap_content"
+            android:layout_height="48dp"
+            android:src="@drawable/back"
+            android:scaleType="fitCenter"
+            android:background="@color/blue"
+            android:layout_marginBottom="10dp"
+            android:layout_weight="1"
+            android:layout_gravity="center_vertical"
+            android:contentDescription="Back Button" />
+
+        <TextView
+            android:id="@+id/network_center_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Network Center"
+            android:textSize="30sp"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="45dp"
+            android:textStyle="bold"
+            android:textColor="@color/white"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:shadowColor="@color/light_navy"
+            android:shadowRadius="6"
+            android:shadowDy="7"/>
+
+    </LinearLayout>
+
+    <ImageButton
+        android:id="@+id/network_scan"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/scan_btn"
+        android:background="@color/navy"
+        android:layout_gravity="center"
+        android:layout_marginTop="10dp"
+        android:contentDescription="Scan Button" />
+
+    <RadioGroup
+        android:id="@+id/scan_mode_selector"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_gravity="center"
+        android:layout_marginTop="12dp">
+
+        <RadioButton
+            android:id="@+id/rb_basic"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="General Info"
+            android:textColor="#FFFFFF"
+            android:buttonTint="#FFFFFF" />
+
+        <RadioButton
+            android:id="@+id/rb_advanced"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Speed Test"
+            android:textColor="#FFFFFF"
+            android:buttonTint="#FFFFFF"
+            android:layout_marginStart="16dp" />
+
+        <RadioButton
+            android:id="@+id/rb_troubleshoot"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Troubleshoot"
+            android:textColor="#FFFFFF"
+            android:buttonTint="#FFFFFF"
+            android:layout_marginStart="16dp" />
+    </RadioGroup>
+
+    <!-- Troubleshoot Tools Section (Initially hidden) -->
+    <LinearLayout
+        android:id="@+id/troubleshoot_tools"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:layout_marginTop="12dp"
+        android:visibility="gone">
+
+        <Button
+            android:id="@+id/btn_ping"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Ping Test"
+            android:layout_marginEnd="16dp"
+            android:textColor="#FFFFFF"
+            android:backgroundTint="#3F51B5"/>
+
+        <Button
+            android:id="@+id/btn_traceroute"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Traceroute"
+            android:textColor="#FFFFFF"
+            android:backgroundTint="#3F51B5"/>
+    </LinearLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:id="@+id/navigationBarWrapper"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:background="#E2E3EC"
+            android:padding="10dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent">
+
+            <!-- Nav Item: Home -->
+            <LinearLayout
+                android:id="@+id/nav_home"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:gravity="center"
+                android:clickable="true"
+                android:focusable="true">
+                <ImageView
+                    android:layout_width="60dp"
+                    android:layout_height="24dp"
+                    android:src="@drawable/home" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Home"
+                    android:textSize="15sp" />
+            </LinearLayout>
+
+            <!-- Nav Item: Scan -->
+            <LinearLayout
+                android:id="@+id/nav_scan"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:gravity="center"
+                android:clickable="true"
+                android:focusable="true">
+                <ImageView
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:src="@drawable/scan" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Scan"
+                    android:textSize="15sp" />
+            </LinearLayout>
+
+            <!-- Nav Item: Settings -->
+            <LinearLayout
+                android:id="@+id/nav_settings"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:gravity="center"
+                android:clickable="true"
+                android:focusable="true">
+                <ImageView
+                    android:layout_width="26dp"
+                    android:layout_height="26dp"
+                    android:src="@drawable/settings" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Settings"
+                    android:textSize="15sp" />
+            </LinearLayout>
+
+            <!-- Nav Item: Help -->
+            <LinearLayout
+                android:id="@+id/nav_help"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:gravity="center"
+                android:clickable="true"
+                android:focusable="true">
+                <ImageView
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:src="@drawable/help"
+                    android:scaleType="centerCrop"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Helpbot"
+                    android:textSize="15sp" />
+            </LinearLayout>
+        </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</LinearLayout>

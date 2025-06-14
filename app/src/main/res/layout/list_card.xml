@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/light_navy_bg"
+    android:weightSum="9"
+    android:layout_marginBottom="10dp">
+
+    <ImageView
+        android:id="@+id/list_icon"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:src="@drawable/wifi_icon"
+        android:layout_weight="1"
+        android:layout_gravity="center_vertical"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="5dp"
+        android:layout_marginLeft="5dp"/>
+
+    <TextView
+        android:id="@+id/list_text"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Cafe"
+        android:textColor="@color/white"
+        android:textStyle="bold"
+        android:textSize="22sp"
+        android:layout_weight="7.5"
+        android:gravity="left"
+        android:layout_gravity="center_vertical"
+        android:layout_marginLeft="10dp"
+        />
+
+    <ImageButton
+        android:id="@+id/trash_btn"
+        android:layout_width="21.88dp"
+        android:layout_height="25dp"
+        android:background="@color/light_navy"
+        android:src="@drawable/trash"
+        android:scaleType="centerCrop"
+        android:layout_gravity="center_vertical"/>
+
+</LinearLayout>
