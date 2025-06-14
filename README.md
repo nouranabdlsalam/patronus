@@ -1,5 +1,7 @@
 # Patronus: AI-Powered Anti-Malware and Application-Level Network Threat Detection System Android Application
 
+## Patronus Book: https://drive.google.com/drive/folders/1Y0JYuHTUOS0WD4C1BNYHHDIfrZOm13em?usp=sharing
+
 ## Overview
 Patronus is an advanced Android security application designed to provide real-time protection against modern cyber threats targeting mobile devices. Unlike traditional antivirus tools that focus on known malware, Patronus leverages AI-powered behavior-based detection to identify zero-day threats and suspicious activities from newly installed or existing apps. It also includes a robust network scanning feature to detect unsafe public Wi-Fi networks, ensuring comprehensive device and network security.
 
