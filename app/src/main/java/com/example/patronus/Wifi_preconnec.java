@@ -76,7 +76,8 @@ public class Wifi_preconnec {
 
                         wifiList.add(wifiInfo);
 
-                        if (riskScore >= 4 && !notifiedSsids.contains(scanResult.SSID)) {
+//                        if (riskScore >= 4 && !notifiedSsids.contains(scanResult.SSID)) {
+                        if (!notifiedSsids.contains(scanResult.SSID)) {
                             if (listener instanceof HomeScreenActivity) {
                                 ((HomeScreenActivity) listener).onThreatDetected(
                                         scanResult.SSID,

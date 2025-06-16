@@ -88,7 +88,7 @@
                         android:id="@+id/attacktitle"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Deauthentication attack is detected"
+                        android:text="Wi-Fi Threat Detected"
                         android:textColor="#FFFFFF"
                         android:textSize="18sp"
                         android:textStyle="bold" />
@@ -97,7 +97,7 @@
                         android:id="@+id/attackdescription"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Someone is trying to disconnect you from the network!"
+                        android:text="You're connected to an unsecured Wi-Fi network. To protect your data, we recommend disconnecting immediately."
                         android:textColor="#CCCCCC"
                         android:textSize="14sp"
                         android:layout_marginTop="4dp" />

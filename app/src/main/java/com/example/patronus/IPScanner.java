@@ -25,13 +25,13 @@ public class IPScanner {
         ArrayList<App> userApps = new ArrayList<>();
         PackageManager pm = context.getPackageManager();
         List<ApplicationInfo> apps = pm.getInstalledApplications(0);
-//
-//        ArrayList<String> browsers = new ArrayList<>();
-//        browsers.add("com.android.chrome");
-//        browsers.add("com.google.android.googlequicksearchbox");
-//        browsers.add("org.mozilla.firefox");
-//        browsers.add("com.opera.browser.afin");
-//        browsers.add("com.brave.browser");
+
+        ArrayList<String> browsers = new ArrayList<>();
+        browsers.add("com.android.chrome");
+        browsers.add("com.google.android.googlequicksearchbox");
+        browsers.add("org.mozilla.firefox");
+        browsers.add("com.opera.browser.afin");
+        browsers.add("com.brave.browser");
 
         for (ApplicationInfo app : apps) {
 //            if ((app.flags & ApplicationInfo.FLAG_SYSTEM) != 0) continue;
@@ -39,9 +39,9 @@ public class IPScanner {
 
             App current = new App(pm.getNameForUid(app.uid), app.loadLabel(pm).toString());
 
-//            if (browsers.contains(app.packageName)){
-//                current.browser = true;
-//            }
+            if (browsers.contains(app.packageName)){
+                current.browser = true;
+            }
 
             current.setUid(app.uid);
             userApps.add(current);
@@ -186,6 +186,9 @@ public class IPScanner {
 
 //        MaliciousIP maliciousIP = new MaliciousIP("192.168.1.36");
 //        ipDao.insertIP(maliciousIP);
+
+        MaliciousIP maliciousIP = new MaliciousIP("192.168.1.36");
+        ipDao.insertIP(maliciousIP);
 
 //        MaliciousIP maliciousIP = new MaliciousIP("142.251.37.202");
 //        ipDao.insertIP(maliciousIP); ------> fix. (SelectAppsScreen?)

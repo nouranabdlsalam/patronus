@@ -24,6 +24,7 @@ public class ThreatRemediation extends AppCompatActivity {
     MaterialButton option1;
     App MaliciousApp;
     ImageButton back;
+    TextView remediationOpt;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -82,7 +83,7 @@ public class ThreatRemediation extends AppCompatActivity {
         attackTitle = findViewById(R.id.attacktitle);
         attackDescription = findViewById(R.id.attackdescription);
         option1 = findViewById(R.id.manualremidiationoption1);
-
+        remediationOpt = findViewById(R.id.remed_opts);
 
         if (getIntent().hasExtra("MaliciousApp")){
             ArrayList<App> MaliciousAppList = getIntent().getParcelableArrayListExtra("MaliciousApp");
@@ -103,12 +104,11 @@ public class ThreatRemediation extends AppCompatActivity {
 
             attackTitle.setText("Network Threat Found");
 
-            Log.d("Browser Check", MaliciousApp.getName() + " is a browser? " + MaliciousApp.browser);
+            Log.d("Browser Check", MaliciousApp.getPackageName() + " is a browser? " + MaliciousApp.browser);
 
             if (MaliciousApp.browser){
                 attackDescription.setText("You have visited a potentially malicious site while using " + MaliciousApp.getName() + ". It is communicating with a suspicious IP address: " + MaliciousApp.getMaliciousIPs().get(0) + " and we recommend avoiding it.");
                 option1.setVisibility(View.GONE);
-                TextView remediationOpt = findViewById(R.id.remed_opts);
                 remediationOpt.setVisibility(View.GONE);
             }
             else {
@@ -123,6 +123,13 @@ public class ThreatRemediation extends AppCompatActivity {
                     attackDescription.setText(MaliciousApp.getName() + " communicates with a suspicious IP: " + MaliciousApp.getMaliciousIPs().get(0) + " and might be malicious. " +
                             "If you don't trust this app, we recommend deleting it.");
                 }
+            }
+        } else if (getIntent().hasExtra("wifi")) {
+            option1.setVisibility(View.GONE);
+            remediationOpt.setVisibility(View.GONE);
+            if (!getIntent().getBooleanExtra("wifi", false)){
+                attackDescription.setText("This Wi-Fi network is safe.");
+                attackTitle.setText("No threats found.");
             }
         }
 

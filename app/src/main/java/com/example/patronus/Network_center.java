@@ -257,6 +257,7 @@
                             Toast.makeText(Network_center.this, "Rogue AP Detected!", Toast.LENGTH_SHORT).show();
                         }
                         Intent intent = new Intent(Network_center.this, ThreatRemediation.class);
+                        intent.putExtra("wifi", true);
                         startActivity(intent);
 
                     })

@@ -3,6 +3,7 @@ package com.example.patronus;
 import android.Manifest;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
@@ -186,10 +187,10 @@ public class HomeScreenActivity extends AppCompatActivity implements Wifi_precon
             int rssi = wifiInfo.getRssi();
             String capabilities = wifiScanner.getSecurityLevelFromCapabilities(ssid);
 
-            ssidText.setText("" + ssid);
-            bssidText.setText("" + bssid);
-            encryptionText.setText("" + rssi + " dBm");
-            ThreatLevel.setText("" + capabilities);
+//            ssidText.setText("" + ssid);
+//            bssidText.setText("" + bssid);
+//            encryptionText.setText("" + rssi + " dBm");
+//            ThreatLevel.setText("" + capabilities);
 
             wifiScanner.startScan();
         } else {
@@ -203,11 +204,23 @@ public class HomeScreenActivity extends AppCompatActivity implements Wifi_precon
             Log.d("ScanResult", wifi);
         }
     }
-    private void showThreatNotification(String suggestion) {
+    private void showThreatNotification(String suggestion, boolean threat) {
         String channelId = "wifi_threat_channel";
         String channelName = "Wi-Fi Threat Notifications";
 
         NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+
+        Intent intent = new Intent(getApplicationContext(), ThreatRemediation.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+
+        intent.putExtra("wifi", threat);
+
+        PendingIntent pendingIntent = PendingIntent.getActivity(
+                getApplicationContext(),
+                0,
+                intent,
+                PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE
+        );
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             NotificationChannel channel = new NotificationChannel(channelId, channelName, NotificationManager.IMPORTANCE_HIGH);
@@ -220,7 +233,8 @@ public class HomeScreenActivity extends AppCompatActivity implements Wifi_precon
                 .setContentTitle("Wi-Fi Threat Detected")
                 .setContentText(suggestion)
                 .setPriority(NotificationCompat.PRIORITY_HIGH)
-                .setAutoCancel(true);
+                .setAutoCancel(true)
+                .setContentIntent(pendingIntent);
 
         notificationManager.notify(1, builder.build());
     }
@@ -234,26 +248,30 @@ public class HomeScreenActivity extends AppCompatActivity implements Wifi_precon
 
             String threatLevel;
             String suggestion;
+            boolean threat;
 
-
+            Log.d("TAG", "onThreatDetected: " + score);
             if (score >= 5) {
                 threatLevel = "⚠️ High Risk";
                 threatStatusIcon.setImageResource(R.drawable.with_threats_warning);
                 threatStatusText.setText("Wi-Fi threat detected!");
                 suggestion = "Use a trusted VPN, avoid entering sensitive data, and consider switching networks.";
+                threat = true;
             } else if (score >= 3) {
                 threatLevel = "⚠️ Moderate Risk";
                 threatStatusText.setText("Wi-Fi threat detected!");
                 threatStatusIcon.setImageResource(R.drawable.with_threats_warning);
                 suggestion = "Caution advised. Do not use apps requiring passwords or personal info.";
+                threat = true;
             } else {
                 threatLevel = "✅ Low Risk";
                 threatStatusText.setText("No Wi-Fi threats detected.");
                 threatStatusIcon.setImageResource(R.drawable.without_threats);
                 suggestion = "Network appears safe.";
+                threat = false;
             }
         ThreatLevel.setText(threatLevel);
-        showThreatNotification(suggestion);
+        showThreatNotification(suggestion, threat);
 
     }
 

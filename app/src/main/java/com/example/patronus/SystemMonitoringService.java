@@ -53,28 +53,28 @@ public class SystemMonitoringService extends Service {
 
                 if (isPowerSaveMode()) {
                     turnMalwareMonitoringOff();
-//                    Toast.makeText(SystemMonitoringService.this, "Power Save Mode detected", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(SystemMonitoringService.this, "Power Save Mode detected", Toast.LENGTH_SHORT).show();
                 } else if (isDeviceCharging()) {
                     turnMalwareMonitoringOn();
-//                    Toast.makeText(SystemMonitoringService.this, "Charging: High Security Mode", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(SystemMonitoringService.this, "Charging: High Security Mode", Toast.LENGTH_SHORT).show();
                 } else if (isDeviceOverheating() && !isDeviceCharging() && isDeviceIdle()) {
                     turnMalwareMonitoringOn();
-//                    Toast.makeText(SystemMonitoringService.this, "Overheating while idle: High Security", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(SystemMonitoringService.this, "Overheating while idle: High Security", Toast.LENGTH_SHORT).show();
                 } else if (isDeviceIdle() && isCpuLoadHigh()) {
                     turnMalwareMonitoringOn();
-//                    Toast.makeText(SystemMonitoringService.this, "Idle + High CPU: High Security", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(SystemMonitoringService.this, "Idle + High CPU: High Security", Toast.LENGTH_SHORT).show();
                 } else if (isCpuLoadHigh() && !isDeviceIdle()) {
                     turnMalwareMonitoringOff();
-//                    Toast.makeText(SystemMonitoringService.this, "Active + High CPU: Low Security (Gaming Mode)", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(SystemMonitoringService.this, "Active + High CPU: Low Security (Gaming Mode)", Toast.LENGTH_SHORT).show();
                 } else if (isDeviceIdle()) {
                     turnMalwareMonitoringOn();
-//                    Toast.makeText(SystemMonitoringService.this, "Idle: High Security Mode", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(SystemMonitoringService.this, "Idle: High Security Mode", Toast.LENGTH_SHORT).show();
                 } else if (batteryLevel > 50) {
                     turnMalwareMonitoringOn();
-//                    Toast.makeText(SystemMonitoringService.this, "Battery > 50%: High Security Mode", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(SystemMonitoringService.this, "Battery > 50%: High Security Mode", Toast.LENGTH_SHORT).show();
                 } else {
                     turnMalwareMonitoringOff();
-//                    Toast.makeText(SystemMonitoringService.this, "Battery <= 50%: Low Security Mode", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(SystemMonitoringService.this, "Battery <= 50%: Low Security Mode", Toast.LENGTH_SHORT).show();
                 }
                 handler.postDelayed(this, 10000); // Re-evaluate every 10 seconds
             }
@@ -185,7 +185,7 @@ public class SystemMonitoringService extends Service {
             if (packageInstallReceiver != null) {
                 unregisterReceiver(packageInstallReceiver);
                 isPackageReceiverRegistered = false;
-                Toast.makeText(this, "Unregistered Receiver", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Malware Monitoing Off", Toast.LENGTH_SHORT).show();
                 Log.d("SETTINGS", "Malware Monitoring is off");
             }
         }
