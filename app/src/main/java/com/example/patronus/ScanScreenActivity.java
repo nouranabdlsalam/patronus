@@ -152,7 +152,10 @@ public class ScanScreenActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         if ((getIntent().hasExtra("selectedApps"))) {
+            selectedApps = new ArrayList<App>();
+            Log.d("SELECTION", "onResume: selected apps size: " + selectedApps.size());
             selectedApps = getIntent().getParcelableArrayListExtra("selectedApps");
+            Log.d("SELECTION", "onResume: selected apps size: " + selectedApps.size());
             selectApps.setChecked(true);
         }
     }

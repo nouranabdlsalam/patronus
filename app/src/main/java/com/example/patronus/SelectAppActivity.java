@@ -26,13 +26,15 @@ public class SelectAppActivity extends AppCompatActivity {
     RecyclerView recyclerView;
     Button done;
     ScrollView scrollView;
-    static ArrayList<App> selectedApps = new ArrayList<>();
+    static ArrayList<App> selectedApps;
     LinearLayout navbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_trusted_networks);
+
+        selectedApps = new ArrayList<>();
 
         back = findViewById(R.id.trusted_networks_back);
         back.setOnClickListener(new View.OnClickListener() {
@@ -93,7 +95,7 @@ public class SelectAppActivity extends AppCompatActivity {
         scrollView = findViewById(R.id.trusted_networks_scroll);
 
         ViewGroup.LayoutParams layoutParams = scrollView.getLayoutParams();
-        layoutParams.height = 600;
+        layoutParams.height = 900;
         scrollView.setLayoutParams(layoutParams);
         done = findViewById(R.id.add_trusted_networks_button);
         navbar = findViewById(R.id.navigationBar);
@@ -115,7 +117,7 @@ public class SelectAppActivity extends AppCompatActivity {
             AppListAdapter adapter = new AppListAdapter(getApplicationContext(), allApps);
             recyclerView.setAdapter(adapter);
 
-            done.setText("Scan Selected Apps");
+            done.setText("Select Apps");
 
             done.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -128,6 +130,12 @@ public class SelectAppActivity extends AppCompatActivity {
         }
 
 
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        selectedApps = new ArrayList<>();
     }
 
     protected static ArrayList<App> setSelectedApps(String packageName, String name, int add){
