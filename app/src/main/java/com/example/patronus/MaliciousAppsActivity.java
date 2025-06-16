@@ -51,13 +51,13 @@ public class MaliciousAppsActivity extends AppCompatActivity {
 
         text = findViewById(R.id.trusted_networks_text);
 
-        scrollView = findViewById(R.id.trusted_networks_scroll);
-
-        ViewGroup.LayoutParams layoutParams = scrollView.getLayoutParams();
-        layoutParams.height = 1200;
-        scrollView.setLayoutParams(layoutParams);
+//        scrollView = findViewById(R.id.trusted_networks_scroll);
 
         recyclerView = findViewById(R.id.trusted_networks_recycler_view);
+        ViewGroup.LayoutParams layoutParams = recyclerView.getLayoutParams();
+        layoutParams.height = 1200;
+        recyclerView.setLayoutParams(layoutParams);
+
 
         navbar = findViewById(R.id.navigationBar);
 

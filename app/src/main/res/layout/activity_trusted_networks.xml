@@ -77,23 +77,26 @@
     </LinearLayout>
 
     <!-- ScrollView section -->
-    <ScrollView
-        android:id="@+id/trusted_networks_scroll"
-        android:layout_width="match_parent"
-        android:layout_height="280dp"
-        android:layout_below="@id/warning_section"
-        android:layout_marginTop="20dp"
-        android:layout_marginLeft="15dp"
-        android:layout_marginRight="15dp">
+<!--    <ScrollView-->
+<!--        android:id="@+id/trusted_networks_scroll"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="280dp"-->
+<!--        android:layout_below="@id/warning_section"-->
+<!--        android:layout_marginTop="20dp"-->
+<!--        android:layout_marginLeft="15dp"-->
+<!--        android:layout_marginRight="15dp">-->
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/trusted_networks_recycler_view"
+            android:layout_below="@id/warning_section"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="280dp"
             android:layout_marginBottom="10dp"
             android:layout_marginTop="10dp"
-            android:nestedScrollingEnabled="true" />
-    </ScrollView>
+            android:nestedScrollingEnabled="true"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"/>
+<!--    </ScrollView>-->
 
     <!-- Add button -->
     <com.google.android.material.button.MaterialButton
@@ -103,7 +106,7 @@
         app:cornerRadius="9dp"
         android:backgroundTint="#B30199E2"
         android:text="Add Trusted Network"
-        android:layout_below="@id/trusted_networks_scroll"
+        android:layout_below="@id/trusted_networks_recycler_view"
         android:layout_centerHorizontal="true"
         android:textStyle="bold"
         android:textSize="22sp"

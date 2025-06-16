@@ -92,11 +92,11 @@ public class SelectAppActivity extends AppCompatActivity {
 
         recyclerView = findViewById(R.id.trusted_networks_recycler_view);
 
-        scrollView = findViewById(R.id.trusted_networks_scroll);
+//        scrollView = findViewById(R.id.trusted_networks_scroll);
 
-        ViewGroup.LayoutParams layoutParams = scrollView.getLayoutParams();
+        ViewGroup.LayoutParams layoutParams = recyclerView.getLayoutParams();
         layoutParams.height = 900;
-        scrollView.setLayoutParams(layoutParams);
+        recyclerView.setLayoutParams(layoutParams);
         done = findViewById(R.id.add_trusted_networks_button);
         navbar = findViewById(R.id.navigationBar);
 
