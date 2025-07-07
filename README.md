@@ -1,9 +1,9 @@
 <img align="left" src="https://github.com/nouranabdlsalam/patronus/blob/153bc75aa2d0452153e1cded952829ddbce8024a/app/src/main/res/mipmap-xxhdpi/ic_launcher_foreground.webp" alt="Patronus Logo" height="80">
 
-# Patronus: AI-Powered Anti-Malware and Application-Level Network Threat Detection System for Android Devices
+# Patronus
 
 ## Overview
-Patronus is an Android security application developed as a graduation project at Alexandria University. It leverages AI to detect malware based on permission patterns and contextual behavior, while also monitoring network activity at the app level. The system is designed to run efficiently on physical Android devices without root access or elevated privileges.
+Patronus is an AI-powered anti-malware and application-level network threat detection system for Android devices developed as a graduation project at Alexandria University. It leverages AI to detect malware based on permission patterns and contextual factors, while also monitoring network activity at the application level. The system is designed to run efficiently on physical Android devices without root access or elevated privileges.
 
 ## Project Thesis
 🔗 [Click here](./Thesis.pdf) to read a comprehensive documentation of our methodology, malware profiling, neural network design, evaluation metrics, and system architecture.  
