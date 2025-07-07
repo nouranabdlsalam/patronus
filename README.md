@@ -34,116 +34,172 @@ Patronus is composed of seven core modules that work together to provide compreh
 
  <br> <br>
 
+
 ### 🦠 AI-Powered Context-Aware Malware Detection System
 
-<img align="right" src="demo/MalwareScanningDemo.gif" alt="Malware Scanner Demo" width="250">
-
-- Detects malicious apps based on static permission behavior.
-  <br> <br>
-- Employs a neural network trained on three diverse malware datasets.
-  <br> <br>
-- Extracts and encodes permissions into binary feature vectors.
-  <br> <br>
-- Integrates six malware-type behavior profiles: Adware, Ransomware, Trojan, Spyware, Backdoor, Worm.
-  <br> <br>
-- Features a context-aware scoring layer to interpret app behavior relative to its category.
-  <br> <br>
-- Reduces false positives by balancing detection precision and functional expectations.
-  <br> <br>
-  <br> <br> <br> <br> <br> <br> 
+<table>
+<tr>
+<td>
+<ul>
+  <li>Detects malicious apps based on static permission behavior.</li>
+ <br><br>
+  <li>Employs a neural network trained on three diverse malware datasets.</li>
+ <br><br>
+  <li>Extracts and encodes permissions into binary feature vectors.</li>
+ <br><br>
+  <li>Integrates six malware-type behavior profiles: Adware, Ransomware, Trojan, Spyware, Backdoor, Worm.</li>
+ <br><br>
+  <li>Features a context-aware scoring layer to reduce false positives.</li>
+ <br><br>
+  <li>Reduces false positives by balancing detection precision and functional expectations.</li>
+ <br><br>
+</ul>
+</td>
+<td >
+  <img src="demo/MalwareScanningDemo.gif" alt="Malware Scanner Demo" width="250">
+</td>
+</tr>
+</table>
 
   ---
   
 ### 🌐 App-Level IP Monitoring
 
-<img align="right" src="demo/AppLevelNetThreatDetectionDemo.gif" alt="IP Monitor Demo" width="250">
+<table>
+<tr>
+<td>
 
+<ul>
+  <li>Periodically extracts and inspects outbound connections from each installed app.</li>
+ <br><br>
+  <li>Maintains a local database of known malicious IP addresses.</li>
+ <br><br>
+  <li>Flags suspicious IP traffic per app, highlighting the responsible process.</li>
+ <br><br>
+  <li>Uses a lightweight, permission-respecting foreground service (no root, no VPN).</li>
+ <br><br>
+  <li>Offers clear risk classification and actionable remediation suggestions.</li>
+ <br><br>
+</ul>
 
-- Periodically extracts and inspects outbound connections from each installed app.
-  <br> <br> 
-- Maintains a local database of known malicious IP addresses.
-  <br> <br> 
-- Flags suspicious IP traffic per app, highlighting the responsible process.
-  <br> <br> 
-- Uses a lightweight, permission-respecting foreground service (no root, no VPN).
-  <br> <br> 
-- Displays connection logs and raises alerts only when a known threat is identified.
-  <br> <br> 
-- Offers clear risk classification and actionable remediation suggestions.
-  <br> <br>
-  <br> <br> <br> <br> <br> <br>
+</td>
+<td>
+  <img src="demo/AppLevelNetThreatDetectionDemo.gif" alt="IP Monitor Demo" width="250">
+</td>
+</tr>
+</table>
 
   ---
 
 ### 🎛️ Configurable Security Modes
 
-<img align="right" src="demo/SecModesandSysMonDemo.gif" alt="Security Modes Demo" width="250">
+<table>
+<tr>
+<td>
 
-- Three predefined security levels: High Performance, High Security, and Balanced.
-   <br> <br>
-- **High Performance Mode**
-  - No background monitoring for new app installs.
-  - This mode is active when malware scanning is turned off.
-   <br> <br>
-- **High Security Mode**
-  -  Activates background activity for monitoring new app installs.
-  -  This mode is active when malware monitoring is turned on.
-   <br> <br>
-- **Balanced Mode**: Automatically switches between the previous two modes depending on the device state (battery levels, power saving status, etc.).
-   <br> <br>
-- Allows users to customize their security experience according to their needs and the required performance, creating a balance between device security and performance.
-   <br> <br>
-    <br> <br> <br> <br> <br> <br> 
+<ul>
+  <li><strong>Three predefined security levels:</strong> High Performance, High Security, and Balanced.</li>
+ <br><br>
+  <li><strong>High Performance Mode:</strong> No background monitoring for new app installs. Active when malware scanning is off.</li>
+ <br><br>
+  <li><strong>High Security Mode:</strong> Enables background activity to monitor new app installs. Active when malware monitoring is on.</li>
+ <br><br>
+  <li><strong>Balanced Mode:</strong> Auromatically switches between the previous two modes based on device state (battery level, power-saving mode, etc.).</li>
+ <br><br>
+  <li>Lets users balance security and performance based on individual preferences.</li>
+ <br><br>
+</ul>
+
+</td>
+<td>
+  <img src="demo/SecModesandSysMonDemo.gif" alt="Security Modes Demo" width="250">
+</td>
+</tr>
+</table>
+
 
 ---
 
 ### 🛜 Wi-Fi Threat Scanner
 
-<img align="right" src="demo/WifiRiskAssessmentDemo.gif" alt="Wi-Fi Scanner Demo" width="250">
+<table>
+<tr>
+<td>
 
-- Automatically evaluates the security of the current connected Wi-Fi network.
-  <br> <br>
-- Inspects encryption type, password protection, and general connection trust level.
-  <br> <br>
-- Flags insecure or open networks and scores them using internal risk metrics.
-  <br> <br>
-- Warns users when authentication is weak or missing altogether.
-  <br> <br>
-- Suggests steps to disconnect, switch networks, or enhance configuration.
-  <br> <br>
-- Runs automatically when the device connects to a new network.
-  <br> <br>
-  <br> <br> <br> <br> <br> <br> <br> <br>
+<ul>
+  <li>Automatically evaluates the security of the current connected Wi-Fi network. </li>
+ <br><br>
+  <li>Inspects encryption type, password protection, and general trust level.</li>
+ <br><br>
+  <li>Flags insecure or open networks using internal risk metrics.</li>
+ <br><br>
+  <li>Warns users when authentication is weak or missing.</li>
+ <br><br>
+  <li>Recommends disconnecting, switching networks, or improving settings.</li>
+ <br><br>
+</ul>
+
+</td>
+<td>
+  <img src="demo/WifiRiskAssessmentDemo.gif" alt="Wi-Fi Scanner Demo" width="250">
+</td>
+</tr>
+</table>
+
   
 ---
 
 ### 🛜 Network Center
 
-<img align="right" src="demo/NetCenterDemo.gif" alt="Network Center Demo" width="250">
+<table>
+<tr>
+<td>
 
-- Provides three essential utilities for assessing network conditions:
-  - **General Test**: Checks overall connection health and responsiveness.
-  - **Speed Test**: Measures download and upload throughput to evaluate performance.
-  - **Troubleshooting Module**: Identifies common misconfigurations or weak points in connectivity.
-    <br> <br>
-- Offers a clean interface with instant results and visual cues.
-     <br> <br>   <br> <br>   <br> <br>   <br> <br>    <br> <br>   <br> <br>    <br> <br>
+<ul>
+  <li><strong>General Test:</strong> Evaluates basic connectivity and responsiveness.</li>
+ <br><br>
+  <li><strong>Speed Test:</strong> Measures upload/download performance.</li>
+ <br><br>
+  <li><strong>Troubleshooting Module:</strong> Identifies misconfigurations or network weaknesses.</li>
+ <br><br>
+  <li>Presents results clearly with visual cues.</li>
+ <br><br>
+</ul>
+
+</td>
+<td style="vertical-align: top; padding-right: 20px;">
+  <img src="demo/NetCenterDemo.gif" alt="Network Center Demo" width="250">
+</td>
+</tr>
+</table>
+
 
   --- 
 
 ### 💬 HelpBot (LLM-Powered Assistant)
 
-<img align="right" src="demo/HelpbotDemo.gif" alt="HelpBot Demo" width="250">
+<table>
+<tr>
+<td>
 
-- An AI assistant integrated inside the app using an API-based language model.
-  <br> <br>
-- Allows users to ask about malware scans, permission concerns, or network safety.
-   <br> <br>
-- Provides a more interactive experience than a standard FAQ section.
-   <br> <br>
-- Always accessible via the floating HelpBot icon in the app.
-   <br> <br>
-    <br> <br> <br> <br> <br> <br>  <br> <br> <br> <br>  <br> <br> <br> <br>
+<ul>
+  <li>AI assistant integrated via a language model API.</li>
+ <br><br>
+  <li>Answers user questions about malware scans, permissions, and network safety.</li>
+ <br><br>
+  <li>Provides a more interactive experience than traditional FAQ sections.</li>
+ <br><br>
+  <li>Always accessible through the floating HelpBot icon.</li>
+ <br><br>
+</ul>
+
+</td>
+<td style="vertical-align: top; padding-right: 20px;">
+  <img src="demo/HelpbotDemo.gif" alt="HelpBot Demo" width="250">
+</td>
+</tr>
+</table>
+
 
 --- 
 
