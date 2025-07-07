@@ -2,7 +2,6 @@
 
 # Patronus
 
-## Overview
 Patronus is an AI-powered anti-malware and application-level network threat detection system for Android devices developed as a graduation project at Alexandria University. It leverages AI to detect malware based on permission patterns and contextual factors, while also monitoring network activity at the application level. The system is designed to run efficiently on physical Android devices without root access or elevated privileges.
 
 ## Project Thesis
