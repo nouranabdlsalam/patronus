@@ -32,8 +32,6 @@ Patronus is composed of seven core modules that work together to provide compreh
 - **Threat Remediation**: Receives malware and network threats and proposes remediation options according to the threat type.
 - **Interactive HelpBot**: A built-in assistant powered by an LLM that explains alerts and provides remediation tips.
 
- <br> <br>
-
 
 ### 🦠 AI-Powered Context-Aware Malware Detection System
 
